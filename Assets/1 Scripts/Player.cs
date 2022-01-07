@@ -5,15 +5,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public int coin;
     float hAxis;
     float vAxis;
     bool rDown;
     bool jDown;
+    bool iDown;
     bool isJump;
     bool isCollision;
+    public bool isShopping;
+    public bool isTalking;
 
     Vector3 moveVec;
-
+    [SerializeField]
+    GameObject nearObject;
+    [SerializeField]
+    Shop shop;
     Rigidbody rigid;
     Animator anim;
 
@@ -26,9 +33,13 @@ public class Player : MonoBehaviour
     private void Update()
     {
         GetInput();
-        Move();
-        Turn();
-        Jump();
+        if(!isTalking)
+        {
+            Move();
+            Turn();
+            Jump();
+        }
+        Interaction();
     }
     // 입력
     void GetInput()
@@ -37,6 +48,7 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         rDown = Input.GetButton("Run");
         jDown = Input.GetButtonDown("Jump");
+        iDown = Input.GetButtonDown("Interaction");
     }
     // 플레이어 이동
     void Move()
@@ -66,6 +78,40 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Interaction()
+    {
+        // 상점 상호작용
+        if(iDown && nearObject != null && !isJump && !isShopping && !isTalking)
+        {
+            if(nearObject.tag == "Shop")
+            {
+                shop.Enter(this);
+            }
+        }
+        else if (iDown && !isShopping && isTalking)
+        {
+            if(shop.isNext)
+            {
+                shop.Close();
+            }
+        }
+        else if (iDown && isShopping && nearObject != null && nearObject.tag == "ShopItem")
+        {
+            if (shop.isNext && shop.isClose)
+                shop.Close();
+
+            else if (shop.isNext)
+            {
+                shop.ShowAnswer();
+            }
+            else
+            {
+                int index = nearObject.GetComponent<Item>().value;
+                shop.Buy(index);
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
@@ -85,12 +131,35 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
-        else
+        else if(other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
             isCollision = true;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Shop" && !isShopping)
+        {
+            nearObject = other.gameObject;
+        }
+        else if(other.tag == "ShopItem" && isShopping)
+        {
+            nearObject = other.gameObject;
+            
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         isCollision = false;
+        if(other.tag == "Shopping" && isShopping)
+        {
+            isShopping = false;
+            shop.Exit();
+            nearObject = null;
+        }
+        else if (other.tag == "ShopItem" && nearObject != null)
+        {
+            nearObject = null;
+        }
     }
 }
