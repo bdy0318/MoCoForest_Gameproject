@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     float vAxis;
     bool rDown;
     bool jDown;
-    bool iDown;
+    public bool iDown;
     bool isJump;
     bool isCollision;
     public bool isShopping;
@@ -162,4 +162,5 @@ public class Player : MonoBehaviour
             nearObject = null;
         }
     }
+
 }
