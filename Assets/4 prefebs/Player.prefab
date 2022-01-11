@@ -721,11 +721,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  coin: 0
-  isShopping: 0
-  isTalking: 0
-  hasItem: 00000000000000000000000000000000000000000000000000000000
-  shop: {fileID: 0}
 --- !u!1 &5378686186768455881
 GameObject:
   m_ObjectHideFlags: 0

@@ -98,7 +98,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 5378686186768680103, guid: 4d1063ff131086c4699cf3d4b9bf4690, type: 3}
   offset: {x: 0, y: 6, z: -5.5}
-  targetPlayer: {fileID: 5378686185937552359, guid: 4d1063ff131086c4699cf3d4b9bf4690, type: 3}
-  shop: {fileID: 0}
-  enterCamera: {fileID: 0}
-  shoppingCamera: {fileID: 0}
