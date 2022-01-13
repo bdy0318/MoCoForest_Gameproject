@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     float vAxis;
     bool rDown;
     bool jDown;
-    public bool iDown;
+    bool iDown;
     bool isJump;
     bool isCollision;
     public bool isShopping;
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     GameObject nearObject;
     [SerializeField]
     Shop shop;
+    NPC npc;
     Rigidbody rigid;
     Animator anim;
 
@@ -131,8 +132,10 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
+
         else if(other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
             isCollision = true;
+        
     }
 
     private void OnTriggerStay(Collider other)
