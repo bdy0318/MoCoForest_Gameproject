@@ -2307,7 +2307,7 @@ MonoBehaviour:
   DialogueText: {fileID: 552356913}
   nameText: {fileID: 1265154432}
   nearNpc: 0
-  isTalking: 0
+  isNpcTalking: 0
   talkManager: {fileID: 4497500}
 --- !u!95 &71907036
 Animator:
@@ -15679,7 +15679,7 @@ MonoBehaviour:
   DialogueText: {fileID: 552356913}
   nameText: {fileID: 1265154432}
   nearNpc: 0
-  isTalking: 0
+  isNpcTalking: 0
   talkManager: {fileID: 4497500}
 --- !u!95 &616308479
 Animator:
@@ -26312,7 +26312,7 @@ MonoBehaviour:
   DialogueText: {fileID: 552356913}
   nameText: {fileID: 1265154432}
   nearNpc: 0
-  isTalking: 0
+  isNpcTalking: 0
   talkManager: {fileID: 4497500}
 --- !u!95 &1072697369
 Animator:
@@ -30625,7 +30625,7 @@ MonoBehaviour:
   DialogueText: {fileID: 552356913}
   nameText: {fileID: 1265154432}
   nearNpc: 0
-  isTalking: 0
+  isNpcTalking: 0
   talkManager: {fileID: 4497500}
 --- !u!54 &1261751004
 Rigidbody:
@@ -32328,7 +32328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352613907}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: NpcTalkPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33629,7 +33629,7 @@ MonoBehaviour:
   DialogueText: {fileID: 552356913}
   nameText: {fileID: 1265154432}
   nearNpc: 0
-  isTalking: 0
+  isNpcTalking: 0
   talkManager: {fileID: 4497500}
 --- !u!95 &1401747624
 Animator:
@@ -46301,7 +46301,7 @@ MonoBehaviour:
   DialogueText: {fileID: 552356913}
   nameText: {fileID: 1265154432}
   nearNpc: 0
-  isTalking: 0
+  isNpcTalking: 0
   talkManager: {fileID: 4497500}
 --- !u!95 &1884469709
 Animator:
