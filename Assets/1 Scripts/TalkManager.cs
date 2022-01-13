@@ -21,7 +21,7 @@ public class TalkManager : MonoBehaviour
         talkData.Add(4000, new string[] { "와!! 안녕 반가워!!", "너는 참 신기하게 생겼다!!!" });
         talkData.Add(5000, new string[] { "네가 동물마을에서 살고 싶다고 한 인간이지?",
                                           "나는 나보다 강한 자만 인정한다고!"});
-        talkData.Add(6000, new string[] { "야, 나한테 가까이 다가오지 마. 날 해칠꺼지?",
+        talkData.Add(6000, new string[] { "나한테 가까이 다가오지 마. 날 해칠꺼지?",
                                           "나는 인간이 우리 마을에 오는게 마음에 안들어."});
     }
 
