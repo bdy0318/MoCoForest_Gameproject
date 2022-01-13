@@ -8,7 +8,6 @@ TagManager:
   - Shop
   - Shopping
   - ShopItem
-  - NPC
   layers:
   - Default
   - TransparentFX
@@ -16,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Npc
+  - 
   - 
   - 
   - 
