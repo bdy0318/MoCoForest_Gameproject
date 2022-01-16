@@ -19,11 +19,14 @@ public class NPC : MonoBehaviour
     public bool isNpcTalking;
 
     public TalkManager talkManager;
+    public Quest quest;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && nearNpc == true)
         {
+            if(!quest.player.isTalking)
+                quest.IsQuestNPC(id);
             pressE.SetActive(false);
             talking();
         }
@@ -62,6 +65,7 @@ public class NPC : MonoBehaviour
         {
             isNpcTalking = false;
             talkIndex = 0;
+            quest.player.isTalking = false;
             return;
         }
 

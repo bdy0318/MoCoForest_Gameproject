@@ -16,30 +16,38 @@ public class ShopCameraControl : MonoBehaviour
 
     public bool isLerping;
     public bool isShopping;
+    public bool isSelling;
 
     public void Update()
     {
         if (isLerping)
         {
             // Shopping Cam
-            if(isShopping)
+            if(isShopping && !isSelling)
             {
                 target.position = Vector3.MoveTowards(target.position, targetPos, Time.deltaTime);
                 shoppingCam.transform.LookAt(target);
                 shoppingCam.transform.position = Vector3.Lerp(shoppingCam.transform.position, shPos, Time.deltaTime);
             }
             // Closeup Cam
+            else if(isSelling)
+            {
+                target.position = Vector3.MoveTowards(target.position, NPC.position, Time.deltaTime);
+                closeupCam.transform.LookAt(target);
+                closeupCam.transform.position = Vector3.Lerp(closeupCam.transform.position, clPos, Time.deltaTime);
+            }
             else
             {
                 closeupCam.transform.LookAt(NPC);
                 closeupCam.transform.position = Vector3.Lerp(closeupCam.transform.position, clPos, Time.deltaTime);
             }
+
+            if (!isShopping && Vector3.Distance(clPos, closeupCam.transform.position) < 0.05f)
+                isLerping = false;
+            else if (isSelling && Vector3.Distance(clPos, closeupCam.transform.position) < 0.05f)
+                isLerping = false;
+            else if (isShopping && !isSelling && Vector3.Distance(shPos, shoppingCam.transform.position) < 0.05f)
+                isLerping = false;
         }
-
-        if (!isShopping & Vector3.Distance(clPos, closeupCam.transform.position) < 0.05f)
-            isLerping = false;
-
-        else if (isShopping & Vector3.Distance(shPos, shoppingCam.transform.position)  < 0.05f)
-            isLerping = false;
     }
 }

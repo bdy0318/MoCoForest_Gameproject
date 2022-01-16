@@ -973,7 +973,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 60
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1828,6 +1828,7 @@ MonoBehaviour:
   btnInventory: {fileID: 3589225397627397915}
   panelInventroy: {fileID: 3589225397699403350}
   player: {fileID: 0}
+  quest: {fileID: 0}
   Stone: {fileID: 3589225399132371537}
   Coin: {fileID: 3589225398809080748}
   closeButton: {fileID: 3589225398800367911}

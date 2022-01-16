@@ -90,6 +90,7 @@ public class Player : MonoBehaviour
     void Interaction()
     {
         // 상점 상호작용
+        // 
         // 상점 입장
         if (iDown && nearObject != null && !isJump && !isShopping && !isTalking && !isInventory)
         {
@@ -106,14 +107,16 @@ public class Player : MonoBehaviour
                 shop.Close();
             }
         }
+        // 상점 구매
+        //
         // 상점 아이템 상호작용
-        else if (iDown && isShopping && nearObject != null && nearObject.tag == "ShopItem" && !isTalking && !isInventory)
+        else if (iDown && isShopping && nearObject != null && nearObject.tag == "ShopItem" && !isTalking && !isInventory && !shop.isSell)
         {
             int index = nearObject.GetComponent<Item>().value;
             shop.Buy(index);
         }
         // 상점 아이템 구매 확인 대사 넘김
-        else if (sDown && isShopping && isTalking)
+        else if (sDown && isShopping && isTalking && !shop.isSell)
         {
             // 구매 여부 선택지 이후 대사 넘김
             if (shop.isNext && shop.isClose && !shop.answerPanel.activeSelf)
@@ -130,25 +133,65 @@ public class Player : MonoBehaviour
                 shop.ShowAnswer();
             }
         }
+        // 상점 아이템 판매
+        //
+        // 판매 입장
+        if (iDown && isShopping && nearObject != null && nearObject.tag == "Shop" && !isTalking && !isInventory)
+        {
+            shop.Sell();
+        }
+        else if (sDown && isShopping && isTalking && shop.isSell)
+        {
+            // 판매할 아이템 종류 선택 표시(돌맹이 or 인벤토리)
+            if (!shop.isClose && shop.isNext)
+            {
+                shop.ShowSellAnswer();
+            }
+            // 아이템 판매 선택
+            else if (!shop.isClose && !shop.isNext) {
+                // 판매 아이템 종류 선택 시
+                if(shop.sellChoosePanel.activeSelf)
+                {
+                    shop.CloseSellAnswer();
+                }
+                // 아이템 판매 개수 선택 시
+                else if (!shop.sellCountPanel.activeSelf && !isInventory)
+                {
+                    shop.isNext = true;
+                    shop.isClose = true;
+                }
+            }
+            // 판매 종료
+            else if (shop.isClose && shop.isNext && !shop.sellCountPanel.activeSelf)
+            {
+                shop.Close();
+            }
+        }
 
         // 인벤토리
+        //
+        // 플레이어 이야기 중인 경우
         if(isTalking)
         {
             inventory.btnInventory.SetActive(false);
         }
+        // 인벤토리가 열리는 경우
         else if(!isTalking && !isInventory)
         {
             inventory.btnInventory.SetActive(true);
         }
+        // tab 키 사용시 인벤토리 열기
         if(tDown && !isTalking && !isInventory)
         {
             inventory.ShowInventory();
         }
+        // tab 키 사용시 인벤토리 닫기
         else if(tDown && !isTalking && inventory.panelInventroy.activeSelf)
         {
             isInventory = false;
             inventory.ShowBtn();
         }
+        // 인벤토리 선택 버튼
         else if(sDown && isInventory && inventory.btnInventory.activeSelf)
         {
             isInventory = false;
@@ -180,15 +223,23 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // 상점 출입 지점 인식
-        if (other.tag == "Shop" && !isShopping)
+        // 상점 출입, 판매 지점 인식
+        if (other.tag == "Shop")
         {
             nearObject = other.gameObject;
+            if (!isTalking)
+                shop.SetEPosition(other);
+            else
+                shop.showKeyE.SetActive(false);
         }
         // 상점 아이템 상호작용 가능 여부 인식
         else if(other.tag == "ShopItem" && isShopping)
         {
             nearObject = other.gameObject;
+            if (!isTalking)
+                shop.SetEPosition(other);
+            else
+                shop.showKeyE.SetActive(false);
         }
     }
 
@@ -203,9 +254,10 @@ public class Player : MonoBehaviour
             nearObject = null;
         }
         // 상점 이용 시 주변에 상호작응 가능한 아이템 없는 경우
-        else if (other.tag == "ShopItem" && nearObject != null)
+        else if ((other.tag == "ShopItem" || other.tag == "Shop") && nearObject != null)
         {
             nearObject = null;
+            shop.showKeyE.SetActive(false);
         }
     }
 }
