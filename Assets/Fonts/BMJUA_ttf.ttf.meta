@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5d8bf20983d25034dbaa2954c6d16eb9
+guid: cef9e963396ffc54e92e004914121067
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,10 +9,8 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - CookieRun
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: d8c82611847fc2d449a0f6c7dfc5ee31, type: 3}
-  - {fileID: 12800000, guid: b0d7933b3b595e644bdfbcb0207ddbf7, type: 3}
+  - BM JUA_TTF
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
