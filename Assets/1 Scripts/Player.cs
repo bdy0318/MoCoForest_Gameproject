@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
 
     public Shop shop;
-    public Inventory inventory;
+    //public Inventory inventory;
 
     Vector3 moveVec;
     GameObject nearObject;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         jDown = Input.GetButtonDown("Jump");
         iDown = Input.GetButtonDown("Interaction"); // E key
         sDown = Input.GetButtonDown("Submit"); // Enter or Space key
-        tDown = Input.GetButtonDown("Inventory"); // Tab key
+        //tDown = Input.GetButtonDown("Inventory"); // Tab key
     }
     // 플레이어 이동
     void Move()
@@ -132,27 +132,27 @@ public class Player : MonoBehaviour
         }
 
         // 인벤토리
-        if(isTalking)
-        {
-            inventory.btnInventory.SetActive(false);
-        }
-        else if(!isTalking && !isInventory)
-        {
-            inventory.btnInventory.SetActive(true);
-        }
-        if(tDown && !isTalking && !isInventory)
-        {
-            inventory.ShowInventory();
-        }
-        else if(tDown && !isTalking && inventory.panelInventroy.activeSelf)
-        {
-            isInventory = false;
-            inventory.ShowBtn();
-        }
-        else if(sDown && isInventory && inventory.btnInventory.activeSelf)
-        {
-            isInventory = false;
-        }
+        //if(isTalking)
+        //{
+        //    inventory.btnInventory.SetActive(false);
+        //}
+        //else if(!isTalking && !isInventory)
+        //{
+        //    inventory.btnInventory.SetActive(true);
+        //}
+        //if(tDown && !isTalking && !isInventory)
+        //{
+        //    inventory.ShowInventory();
+        //}
+        //else if(tDown && !isTalking && inventory.panelInventroy.activeSelf)
+        //{
+        //    isInventory = false;
+        //    inventory.ShowBtn();
+        //}
+        //else if(sDown && isInventory && inventory.btnInventory.activeSelf)
+        //{
+        //    isInventory = false;
+        //}
     }
 
     private void OnCollisionEnter(Collision collision)
