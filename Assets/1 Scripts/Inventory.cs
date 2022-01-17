@@ -8,7 +8,9 @@ public class Inventory : MonoBehaviour
     public GameObject btnInventory;
     public GameObject panelInventroy;
     public Player player;
-
+    public Quest quest;
+    public Shop shop;
+    // UI
     public Text Stone;
     public Text Coin;
     public Button closeButton;
@@ -21,19 +23,40 @@ public class Inventory : MonoBehaviour
     public GameObject[] itemList;
 
     bool isItem;
+    bool isSelectedItem;
     int index;
     int length;
 
+    // 인벤토리 버튼 보이기, 인벤토리 닫기
     public void ShowBtn()
     {
+        // 아이템이 있으면
         if(isItem)
             itemList[index].SetActive(false);
-        btnInventory.SetActive(true);
+        // 판매용으로 연 경우가 아니면
+        if (!shop.isSell)
+            btnInventory.SetActive(true);
+        else
+        {
+            shop.CloseSellAnswer();
+            if (isSelectedItem)
+            {
+                shop.ItemSellCount(player.hasItem[index]);
+                shop.itemIndex = index; // 선택 아이템 인덱스
+                shop.price = (int)(shop.itemPrice[index] * 0.8); // 선택 아이템 가격
+            }
+            else
+            {
+                shop.NotSellItem(); // 아무 아이템도 판매하지 않음
+            }
+            player.isInventory = false;
+        }
         panelInventroy.SetActive(false);
+        isSelectedItem = false;
         if(Input.GetMouseButtonUp(0))
             player.isInventory = false;
     }
-
+    // 인벤토리 열기, 인벤토리 버튼 닫기
     public void ShowInventory()
     {
         length = player.hasItem.Length;
@@ -47,7 +70,7 @@ public class Inventory : MonoBehaviour
                 break;
             }
         }
-
+        // 소지 아이템이 있는 경우
         if (isItem)
         {
             Button rb = rightBtn.GetComponent<Button>();
@@ -57,6 +80,7 @@ public class Inventory : MonoBehaviour
             selectButton.interactable = true;
             InventoryRight();
         }
+        // 소지 아이템이 없는 경우
         else
         {
             leftBtn.GetComponent<Button>().interactable = false;
@@ -72,8 +96,9 @@ public class Inventory : MonoBehaviour
         btnInventory.SetActive(false);
         panelInventroy.SetActive(true);
         player.isInventory = true;
+        quest.ChangeQuestList();
     }
-
+    // 인벤토리 오른 버튼 클릭
     public void InventoryRight()
     {
         if(index != -1)
@@ -93,7 +118,7 @@ public class Inventory : MonoBehaviour
             InventoryRight();
         }
     }
-
+    // 인벤토리 왼 버튼 클릭
     public void InventoryLeft()
     {
         itemList[index].SetActive(false);
@@ -111,10 +136,12 @@ public class Inventory : MonoBehaviour
             InventoryLeft();
         }
     }
-
+    // 인벤토리 아이템 선택
     public void SelectItem()
     {
-        player.selectItem = itemList[index];
+        if (!shop.isSell)
+            player.selectItem = itemList[index];
+        isSelectedItem = true;
         ShowBtn();
     }
 }

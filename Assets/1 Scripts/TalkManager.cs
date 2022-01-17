@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TalkManager : MonoBehaviour
 {
-    Dictionary<int, string[]> talkData;
+    public Dictionary<int, string[]> talkData;
     private void Awake()
     {
         talkData = new Dictionary<int, string[]>();
