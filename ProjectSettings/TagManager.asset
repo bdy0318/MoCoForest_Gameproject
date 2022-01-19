@@ -9,6 +9,8 @@ TagManager:
   - Shopping
   - ShopItem
   - Rock
+  - Weapon
+  - Melee
   layers:
   - Default
   - TransparentFX
