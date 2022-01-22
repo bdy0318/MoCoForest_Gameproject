@@ -1,9 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    #region Singleton
+    public static Player instance;
+
+    private void Awake()
+    {
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        rigid = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    #endregion Singleton
     public float speed;
     public int coin;
     public int stone; // 채집한 돌 개수
@@ -30,19 +47,17 @@ public class Player : MonoBehaviour
     Rigidbody rigid;
     Animator anim;
 
-    void Awake()
-    {
-        rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-    }
-
     private void Update()
     {
-        GetInput();
-        Move();
-        Turn();
-        Jump();
-        Interaction();
+        // 카트레이싱 중에는 실행X
+        if(SceneManager.GetActiveScene().name != "CartRacing")
+        {
+            GetInput();
+            Move();
+            Turn();
+            Jump();
+            Interaction();
+        }
     }
     // 입력
     void GetInput()

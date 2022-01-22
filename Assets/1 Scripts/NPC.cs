@@ -21,6 +21,13 @@ public class NPC : MonoBehaviour
     public TalkManager talkManager;
     public Quest quest;
 
+    private void Start()
+    {
+        // 비파괴 오브젝트 할당
+        quest = GameManager.Instance.quest;
+        talkManager = GameManager.Instance.talkManager;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && nearNpc == true)
@@ -54,6 +61,9 @@ public class NPC : MonoBehaviour
     {
         Talk(id);
         NpcPannel.SetActive(isNpcTalking);
+        // 퀘스트 5번 진행 시 대화 종료 후 카트레이싱 시작
+        if (!isNpcTalking && !quest.isComplete && quest.nowQuest == 5 && id == 5000)
+            quest.QuestScene();
         nameText.text = Name;
     }
 

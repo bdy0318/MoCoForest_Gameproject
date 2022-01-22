@@ -9,6 +9,10 @@ TagManager:
   - Shopping
   - ShopItem
   - NPC
+  - Road
+  - Car
+  - OtherCar
+  - Obstacle
   layers:
   - Default
   - TransparentFX
