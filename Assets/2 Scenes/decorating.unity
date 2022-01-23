@@ -50851,8 +50851,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1340459831}
+  quest: {fileID: 0}
+  talkManager: {fileID: 0}
   coinPanel: {fileID: 562938896}
   playerCoinTxt: {fileID: 754042367}
+  playerPos: {x: 0, y: 0, z: 0}
 --- !u!4 &2056465802
 Transform:
   m_ObjectHideFlags: 0
