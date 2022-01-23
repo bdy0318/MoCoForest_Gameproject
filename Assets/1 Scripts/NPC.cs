@@ -12,21 +12,26 @@ public class NPC : MonoBehaviour
 
     public GameObject NpcPannel;
     public GameObject pressE;
+    public Text pressEText;
     public Text DialogueText;
     public Text nameText;
 
     public bool nearNpc;
     public bool isNpcTalking;
+    bool finishTalk;
 
     public TalkManager talkManager;
     public Quest quest;
+    public Player player;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && nearNpc == true)
+        //E키를 눌러 npc와 대화
+        if (Input.GetKeyDown(KeyCode.E) && nearNpc)
         {
-            if(!quest.player.isTalking)
+            if (!quest.player.isTalking)
                 quest.IsQuestNPC(id);
+                nearNpc = true;     //말하는 도중에는 계속 true. 대화 도중 오류 방지
             pressE.SetActive(false);
             talking();
         }
@@ -34,22 +39,29 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player") 
         {
-            nearNpc = true;
+            pressEText.text = "대화를 하려면 [E]를 누르세요";
             pressE.SetActive(true);
         }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+            nearNpc = true;
+
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            nearNpc = false;
             pressE.SetActive(false);
+            nearNpc = false;
+
         }
     }
-
+    
     public void talking()
     {
         Talk(id);

@@ -38,11 +38,11 @@ public class Shop : MonoBehaviour
     {
         StopAllCoroutines();
         enterPlayer = player;
-        
-        //camControl.closeupCam.transform.position = mainCam.transform.position;
-        //camControl.closeupCam.transform.rotation = mainCam.transform.rotation;
-        //camControl.closeupCam.SetActive(true);
-        //camControl.isLerping = true;
+
+        camControl.closeupCam.transform.position = mainCam.transform.position;
+        camControl.closeupCam.transform.rotation = mainCam.transform.rotation;
+        camControl.closeupCam.SetActive(true);
+        camControl.isLerping = true;
         isEnter = true;
         TalkUp();
         TalkHello();
@@ -70,13 +70,13 @@ public class Shop : MonoBehaviour
         // 상점 입장 대화창의 경우
         if(isEnter)
         {
-            //camControl.shoppingCam.transform.position = camControl.closeupCam.transform.position;
-            //camControl.shoppingCam.transform.rotation = camControl.closeupCam.transform.rotation;
-            //camControl.target.transform.position = camControl.NPC.transform.position;
-            //camControl.closeupCam.SetActive(false);
-            //camControl.isShopping = true;
-            //camControl.isLerping = true;
-            //camControl.shoppingCam.SetActive(true);
+            camControl.shoppingCam.transform.position = camControl.closeupCam.transform.position;
+            camControl.shoppingCam.transform.rotation = camControl.closeupCam.transform.rotation;
+            camControl.target.transform.position = camControl.NPC.transform.position;
+            camControl.closeupCam.SetActive(false);
+            camControl.isShopping = true;
+            camControl.isLerping = true;
+            camControl.shoppingCam.SetActive(true);
             isEnter = false;
         }
         // 상점 판매 대화창의 경우

@@ -9,6 +9,7 @@ TagManager:
   - Shopping
   - ShopItem
   - NPC
+  - Deco
   layers:
   - Default
   - TransparentFX

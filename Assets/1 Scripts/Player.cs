@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     bool iDown;
     bool sDown;
     bool tDown;
-    bool isJump;
+    bool isJump; 
     bool isCollision;
     public bool isShopping;
     public bool isTalking;
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
     // 점프
     void Jump()
     {
-        if (jDown && !isJump && !isTalking && !isInventory)
+        if (jDown && !isJump && !isTalking && !isInventory) //npc근처에서 점프 금지
         {
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
@@ -196,6 +196,7 @@ public class Player : MonoBehaviour
         {
             isInventory = false;
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)
