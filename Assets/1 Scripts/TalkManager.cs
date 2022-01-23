@@ -5,12 +5,24 @@ using UnityEngine.UI;
 
 public class TalkManager : MonoBehaviour
 {
-    public Dictionary<int, string[]> talkData;
+    #region Singleton
+    public static TalkManager instance;
+
     private void Awake()
     {
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
         talkData = new Dictionary<int, string[]>();
         GenrateData();
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+    #endregion Singleton
+
+    public Dictionary<int, string[]> talkData;
 
     void GenrateData()
     {
@@ -32,8 +44,5 @@ public class TalkManager : MonoBehaviour
         else
             return talkData[id][talkIndex];
     }
-
-   
-
 }
 

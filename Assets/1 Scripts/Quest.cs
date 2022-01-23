@@ -1,9 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Quest : MonoBehaviour
 {
+    #region Singleton
+    public static Quest instance;
+
+    private void Awake()
+    {
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    #endregion Singleton
     public Inventory inventory;
     public Player player;
     public TalkManager talkManager;
@@ -13,6 +29,8 @@ public class Quest : MonoBehaviour
     public int nowQuest;
     public int thirdQuest; // 세번째 퀘스트 마을 꾸미기 진행도 표시
     public bool isComplete;
+    public bool isMapChanged;
+    public bool isGameWin;
 
     // 퀘스트 목록 변경
     public void ChangeQuestList()
@@ -35,6 +53,7 @@ public class Quest : MonoBehaviour
     {
         nowQuest++;
         isComplete = false;
+        isGameWin = false;
         ChangeQuestList();
     }
     // 현재 NPC가 퀘스트를 주는 NPC인지 판단
@@ -129,15 +148,16 @@ public class Quest : MonoBehaviour
     public void FifthQuest()
     {
         // 퀘스트 완료
-        if (nowQuest == 5 && !isComplete && true) // true -> 몇점 이상 달성하면
+        if (nowQuest == 5 && !isComplete && isGameWin)
         {
             talkManager.talkData[5000] = npcTalk.completeTalk4;
             isComplete = true;
             ChangeQuestList();
         }
+        // 퀘스트 진행 중
         else if (nowQuest == 5 && !isComplete)
         {
-            // 게임으로 이동
+            talkManager.talkData[5000] = npcTalk.questTalk4;
         }
         // 퀘스트 받기 전
         else if (nowQuest == 4 && isComplete)
@@ -166,5 +186,34 @@ public class Quest : MonoBehaviour
             talkManager.talkData[6000] = npcTalk.questTalk5;
             NextQuest();
         }
+    }
+
+    // 퀘스트 장면 전환
+    public void QuestScene()
+    {
+        // 5번 퀘스트 진행 시 카트레이싱
+        if(nowQuest == 5)
+            SceneManager.LoadScene("CartRacing");
+    }
+
+    // 5번 퀘스트 실패 시 대사 출력
+    public void FifthFailed()
+    {
+        player.isTalking = true;
+        npc[4].pressE.SetActive(false);
+        talkManager.talkData[5000] = npcTalk.FailedTalk4;
+        npc[4].nameText.text = npc[4].Name;
+        npc[4].pressE.SetActive(false);
+        npc[4].DialogueText.text = talkManager.talkData[5000][0];
+        npc[4].NpcPannel.SetActive(true);
+        StartCoroutine(Second());
+    }
+
+    // 초 대기 후 대사 종료
+    IEnumerator Second()
+    {
+        yield return new WaitForSeconds(2f);
+        npc[4].NpcPannel.SetActive(false);
+        player.isTalking = false;
     }
 }
