@@ -967,12 +967,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 60
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: cef9e963396ffc54e92e004914121067, type: 3}
+    m_FontSize: 70
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
-    m_MaxSize: 60
+    m_MaxSize: 70
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1083,9 +1083,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: cef9e963396ffc54e92e004914121067, type: 3}
+    m_FontSize: 80
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 80
@@ -1452,12 +1452,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: cef9e963396ffc54e92e004914121067, type: 3}
+    m_FontSize: 90
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
-    m_MaxSize: 80
+    m_MaxSize: 90
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1531,12 +1531,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: cef9e963396ffc54e92e004914121067, type: 3}
+    m_FontSize: 90
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 8
-    m_MaxSize: 80
+    m_MaxSize: 90
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1762,12 +1762,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 70
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: cef9e963396ffc54e92e004914121067, type: 3}
+    m_FontSize: 80
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 6
-    m_MaxSize: 70
+    m_MaxSize: 80
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1829,6 +1829,7 @@ MonoBehaviour:
   panelInventroy: {fileID: 3589225397699403350}
   player: {fileID: 0}
   quest: {fileID: 0}
+  shop: {fileID: 0}
   Stone: {fileID: 3589225399132371537}
   Coin: {fileID: 3589225398809080748}
   closeButton: {fileID: 3589225398800367911}
@@ -1912,12 +1913,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
-    m_FontStyle: 1
+    m_Font: {fileID: 12800000, guid: cef9e963396ffc54e92e004914121067, type: 3}
+    m_FontSize: 90
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 8
-    m_MaxSize: 80
+    m_MaxSize: 90
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1

@@ -27,6 +27,13 @@ public class Inventory : MonoBehaviour
     int index;
     int length;
 
+    private void Start()
+    {
+        // 비파괴 오브젝트 할당
+        player = GameManager.Instance.player;
+        quest = GameManager.Instance.quest;
+    }
+
     // 인벤토리 버튼 보이기, 인벤토리 닫기
     public void ShowBtn()
     {

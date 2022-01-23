@@ -38,7 +38,7 @@ public class Shop : MonoBehaviour
     {
         StopAllCoroutines();
         enterPlayer = player;
-
+        
         camControl.closeupCam.transform.position = mainCam.transform.position;
         camControl.closeupCam.transform.rotation = mainCam.transform.rotation;
         camControl.closeupCam.SetActive(true);
