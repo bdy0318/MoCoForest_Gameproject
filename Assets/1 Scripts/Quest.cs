@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Quest : MonoBehaviour
 {
     public Inventory inventory;
@@ -9,10 +10,14 @@ public class Quest : MonoBehaviour
     public TalkManager talkManager;
     public QuestTalk npcTalk;
     public List<NPC> npc;
+
     public string[] questList; // 퀘스트 목록
     public int nowQuest;
-    public int thirdQuest; // 세번째 퀘스트 마을 꾸미기 진행도 표시
     public bool isComplete;
+
+    public int thirdQuest; // 세번째 퀘스트 마을 꾸미기 진행도 표시
+    public GameObject Decoration; //세번째 퀘스트 시작할 때 꾸미기 기능 활성화
+    public TextMesh QuestIcon; //물음표 아이콘
 
     // 퀘스트 목록 변경
     public void ChangeQuestList()
@@ -29,6 +34,7 @@ public class Quest : MonoBehaviour
             else
                 inventory.questText.text = questList[nowQuest - 1];
         }
+
     }
     // 다음 퀘스트 부여
     public void NextQuest()
@@ -37,6 +43,7 @@ public class Quest : MonoBehaviour
         isComplete = false;
         ChangeQuestList();
     }
+
     // 현재 NPC가 퀘스트를 주는 NPC인지 판단
     public void IsQuestNPC(int id)
     {
@@ -61,6 +68,8 @@ public class Quest : MonoBehaviour
             player.stone -= 3;
             isComplete = true;
             ChangeQuestList();
+            QuestIcon.transform.position = npc[1].transform.position + new Vector3(0, 3, 0);
+
         }
         // 퀘스트 받기 전
         else if (nowQuest == 0)
@@ -72,36 +81,57 @@ public class Quest : MonoBehaviour
 
     public void SecondQuest()
     {
-        // 퀘스트 완료
-        if (nowQuest == 2 && !isComplete && player.selectItem) // player.selectedItem -> 선물하면
+        // 퀘스트 완료 하기 쉽게 임시로 얘도 돌 3개로 바꿨음.
+        if (nowQuest == 2 && player.stone >= 3 && !isComplete)
         {
             talkManager.talkData[2000] = npcTalk.completeTalk1;
-            player.hasItem[player.selectItem.GetComponent<Item>().value]--; // 선물한 아이템 인벤토리에서 제거
-            player.selectItem = null;
+            player.stone -= 3;
             isComplete = true;
             ChangeQuestList();
+            QuestIcon.transform.position = npc[2].transform.position + new Vector3(0, 3, 0);
+
         }
         // 퀘스트 받기 전
-        else if (nowQuest == 1 && isComplete) {
+        else if (nowQuest == 1 && isComplete)
+        {
             talkManager.talkData[2000] = npcTalk.questTalk1;
             NextQuest();
         }
+
+        //// 퀘스트 완료
+        //if (nowQuest == 2 && !isComplete && player.selectItem) // player.selectedItem -> 선물하면
+        //{
+        //    talkManager.talkData[2000] = npcTalk.completeTalk1;
+        //    player.hasItem[player.selectItem.GetComponent<Item>().value]--; // 선물한 아이템 인벤토리에서 제거
+        //    player.selectItem = null;
+        //    isComplete = true;
+        //    ChangeQuestList();
+        //}
+        //// 퀘스트 받기 전
+        //else if (nowQuest == 1 && isComplete) {
+        //    talkManager.talkData[2000] = npcTalk.questTalk1;
+        //    NextQuest();
+        //}
     }
 
     public void ThirdQuest()
     {
         // 퀘스트 완료
-        if (nowQuest == 3 && !isComplete && thirdQuest >= 3)
+        if (nowQuest == 3 && !isComplete && thirdQuest == 3)
         {
             talkManager.talkData[3000] = npcTalk.completeTalk2;
             isComplete = true;
             ChangeQuestList();
+            QuestIcon.transform.position = npc[3].transform.position + new Vector3(0, 3, 0);
+
         }
         // 퀘스트 받기 전
         else if (nowQuest == 2 && isComplete)
         {
             talkManager.talkData[3000] = npcTalk.questTalk2;
             NextQuest();
+            thirdQuest = 0;
+            Decoration.SetActive(true); //마을 꾸미기 기능 활성화
         }
     }
 
@@ -113,6 +143,8 @@ public class Quest : MonoBehaviour
             talkManager.talkData[4000] = npcTalk.completeTalk3;
             isComplete = true;
             ChangeQuestList();
+            QuestIcon.transform.position = npc[4].transform.position + new Vector3(0, 3, 0);
+
         }
         else if (nowQuest == 4 && !isComplete) // 게임 진행
         {
@@ -134,6 +166,8 @@ public class Quest : MonoBehaviour
             talkManager.talkData[5000] = npcTalk.completeTalk4;
             isComplete = true;
             ChangeQuestList();
+            QuestIcon.transform.position = npc[5].transform.position + new Vector3(0, 3, 0);
+
         }
         else if (nowQuest == 5 && !isComplete)
         {

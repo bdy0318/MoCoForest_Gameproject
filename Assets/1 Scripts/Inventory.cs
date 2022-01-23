@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     public GameObject[] itemList;
 
     bool isItem;
-    bool isSelectedItem;
+    public bool isSelectedItem;
     int index;
     int length;
 
@@ -142,6 +142,7 @@ public class Inventory : MonoBehaviour
         if (!shop.isSell)
             player.selectItem = itemList[index];
         isSelectedItem = true;
+
         ShowBtn();
     }
 }

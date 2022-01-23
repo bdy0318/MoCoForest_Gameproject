@@ -14,7 +14,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        player.coin = 5000;
+        //퀘스트 쉽게 넘어가기
+        player.coin = 50000;
+        player.stone = 50;
+        
     }
 
     void LateUpdate()
