@@ -10,6 +10,7 @@ TagManager:
   - Shopping
   - ShopItem
 <<<<<<< HEAD
+<<<<<<< HEAD
   - Weapon
   - Melee
   - Enemy
@@ -21,13 +22,19 @@ TagManager:
 =======
   tags: []
 >>>>>>> Stashed changes
+=======
+  - Rock
+  - Weapon
+  - Melee
+>>>>>>> parent of 66f9c20 (add enemymoster)
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - 
   - Water
   - UI
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
   - EnemyDead
@@ -37,6 +44,9 @@ TagManager:
 =======
   - 
 >>>>>>> Stashed changes
+=======
+  - 
+>>>>>>> parent of 66f9c20 (add enemymoster)
   - 
   - 
   - 
