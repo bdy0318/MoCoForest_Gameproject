@@ -167,77 +167,80 @@ public class Player : MonoBehaviour
     {
         isSwap = false;
     }
-     void weaponInteraction()
-        {
-            //무기획득
-            if (iDown1 && nearObject_w != null)
-            {
-                if (nearObject_w.tag == "Weapon")
-                {
-                    Item item = nearObject_w.GetComponent<Item>();
-                    int weaponIndex = item.value;
-                    hasWeapons[weaponIndex] = true;
 
-                    Destroy(nearObject_w);
-                }
+    void weaponInteraction()
+    {
+        //무기획득
+        if (iDown1 && nearObject_w != null)
+        {
+            if (nearObject_w.tag == "Weapon")
+            {
+                Item item = nearObject_w.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
+                Destroy(nearObject_w);
             }
         }
-        void Interaction()
+    }
+    void Interaction()
+    {
+        // 상점 상호작용
+        // 상점 입장
+
+        if (iDown && nearObject != null && !isJump && !isShopping && !isTalking)
         {
-            // 상점 상호작용
-            // 상점 입장
-            if (iDown && nearObject != null && !isJump && !isShopping && !isTalking)
+            if (nearObject.tag == "Shop")
             {
-                if (nearObject.tag == "Shop")
-                {
-                    shop.Enter(this);
-                }
-            }
-            // 상점 입장 대사 넘김
-            else if (sDown && !isShopping && isTalking)
-            {
-                if (shop.isNext)
-                {
-                    shop.Close();
-                }
-            }
-            // 상점 아이템 상호작용
-            else if (iDown && isShopping && nearObject != null && nearObject.tag == "ShopItem" && !isTalking)
-            {
-                int index = nearObject.GetComponent<Item>().value;
-                shop.Buy(index);
-            }
-            // 상점 아이템 구매 확인 대사 넘김
-            else if (sDown && isShopping && isTalking)
-            {
-                // 구매 여부 선택지 이후 대사 넘김
-                if (shop.isNext && shop.isClose && !shop.answerPanel.activeSelf)
-                    shop.Close();
-                // 구매 선택지, 대사 닫기
-                else if (shop.isNext && !shop.isClose && shop.answerPanel.activeSelf)
-                {
-                    shop.isClose = true;
-                    shop.CloseAnswer();
-                }
-                // 선택지 표시
-                else if (shop.isNext && !shop.answerPanel.activeSelf)
-                {
-                    shop.ShowAnswer();
-                }
+                shop.Enter(this);
             }
         }
-
-        private void OnCollisionEnter(Collision collision)
+        // 상점 입장 대사 넘김
+        else if (sDown && !isShopping && isTalking)
         {
-            if (collision.gameObject.tag == "Ground")
+            if (shop.isNext)
             {
-                isJump = false; // 점프 활성
+                shop.Close();
             }
         }
-
-        private void OnTriggerEnter(Collider other)
+        // 상점 아이템 상호작용
+        else if (iDown && isShopping && nearObject != null && nearObject.tag == "ShopItem" && !isTalking)
         {
-            if(other.tag == "Item")
+            int index = nearObject.GetComponent<Item>().value;
+            shop.Buy(index);
+        }
+        // 상점 아이템 구매 확인 대사 넘김
+        else if (sDown && isShopping && isTalking)
+        {
+            // 구매 여부 선택지 이후 대사 넘김
+            if (shop.isNext && shop.isClose && !shop.answerPanel.activeSelf)
+                shop.Close();
+            // 구매 선택지, 대사 닫기
+                
+            else if (shop.isNext && !shop.isClose && shop.answerPanel.activeSelf)
+            {
+                shop.isClose = true;
+                shop.CloseAnswer();
+            }
+                
+            // 선택지 표시
+            else if (shop.isNext && !shop.answerPanel.activeSelf)
+            {
+                shop.ShowAnswer(); 
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isJump = false; // 점프 활성
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Item")
         {
             Item item = other.GetComponent<Item>();
             switch (item.type)
@@ -250,56 +253,58 @@ public class Player : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-            if (other.gameObject.transform.position.y < transform.position.y)
-            {
-                anim.SetBool("isJump", false); // 점프 중지
-            }
-
-            if (other.gameObject.tag == "Ground")
-            {
-                anim.SetBool("isJump", false); // 점프 중지
-            }
-            else if (other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
-                isCollision = true; // 맵에 충돌 중
-        }
-
-        private void OnTriggerStay(Collider other)
+            
+        if (other.gameObject.transform.position.y < transform.position.y)
         {
-            // 상점 출입 지점 인식
-            if (other.tag == "Shop" && !isShopping)
-            {
-                nearObject = other.gameObject;
-            }
-            // 상점 아이템 상호작용 가능 여부 인식
-            else if (other.tag == "ShopItem" && isShopping)
-            {
-                nearObject = other.gameObject;
-            }
-            else if (other.tag == "Weapon")
-            {
-                nearObject_w = other.gameObject;
-            }
+            anim.SetBool("isJump", false); // 점프 중지
         }
-
-        private void OnTriggerExit(Collider other)
+        if (other.gameObject.tag == "Ground")
         {
-            isCollision = false;
-            // 상점 지역에서 빠져나오는 경우
-            if (other.tag == "Shopping" && isShopping)
-            {
-                isShopping = false;
-                shop.Exit();
-                nearObject = null;
-            }
-            // 상점 이용 시 주변에 상호작응 가능한 아이템 없는 경우
-            else if (other.tag == "ShopItem" && nearObject != null)
-            {
-                nearObject = null;
-            }
-
-            else if (other.tag == "Weapon")
-            {
-                nearObject_w = null;
-            }
+            anim.SetBool("isJump", false); // 점프 중지
         }
-   }
+        else if (other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
+            isCollision = true; // 맵에 충돌 중
+    }
+
+        
+    private void OnTriggerStay(Collider other)
+    {
+        // 상점 출입 지점 인식
+        if (other.tag == "Shop" && !isShopping)
+        {
+            nearObject = other.gameObject;
+        }
+        // 상점 아이템 상호작용 가능 여부 인식
+        else if (other.tag == "ShopItem" && isShopping)
+        {
+            nearObject = other.gameObject;
+        }
+            
+        else if (other.tag == "Weapon")
+        {
+            nearObject_w = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {        
+        isCollision = false;
+        // 상점 지역에서 빠져나오는 경우
+        if (other.tag == "Shopping" && isShopping)
+        {
+            isShopping = false;
+            shop.Exit();
+            nearObject = null;
+        }
+        // 상점 이용 시 주변에 상호작응 가능한 아이템 없는 경우
+        else if (other.tag == "ShopItem" && nearObject != null)
+        {
+            nearObject = null;
+        }
+            
+        else if (other.tag == "Weapon")
+        {
+            nearObject_w = null;
+        }
+    }
+}
