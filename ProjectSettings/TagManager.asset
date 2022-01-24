@@ -3,30 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-<<<<<<< Updated upstream
-  tags:
-  - Ground
-  - Shop
-  - Shopping
-  - ShopItem
-<<<<<<< HEAD
-<<<<<<< HEAD
-  - Weapon
-  - Melee
-  - Enemy
-  - Item
-=======
-  - NPC
-  - Deco
->>>>>>> main
-=======
   tags: []
->>>>>>> Stashed changes
-=======
-  - Rock
-  - Weapon
-  - Melee
->>>>>>> parent of 66f9c20 (add enemymoster)
   layers:
   - Default
   - TransparentFX
@@ -34,19 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-  - EnemyDead
-=======
-  - Npc
->>>>>>> main
-=======
   - 
->>>>>>> Stashed changes
-=======
-  - 
->>>>>>> parent of 66f9c20 (add enemymoster)
   - 
   - 
   - 
