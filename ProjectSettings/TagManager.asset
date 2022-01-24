@@ -8,15 +8,10 @@ TagManager:
   - Shop
   - Shopping
   - ShopItem
-<<<<<<< HEAD
   - Weapon
   - Melee
   - Enemy
   - Item
-=======
-  - NPC
-  - Deco
->>>>>>> main
   layers:
   - Default
   - TransparentFX
@@ -24,11 +19,7 @@ TagManager:
   - Enemy
   - Water
   - UI
-<<<<<<< HEAD
   - EnemyDead
-=======
-  - Npc
->>>>>>> main
   - 
   - 
   - 
