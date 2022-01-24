@@ -414,7 +414,6 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
-<<<<<<< HEAD
   - serializedVersion: 3
     m_Name: Swap3
     descriptiveName: 
@@ -438,5 +437,3 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
-=======
->>>>>>> parent of 66f9c20 (add enemymoster)

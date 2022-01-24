@@ -4,35 +4,38 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
-    [SerializeField]
-    private int hp;
+    public int maxHealth;
+    public int curHealth;
 
-    [SerializeField]
-    private float destroyTime;
+    Rigidbody rigid;
+    BoxCollider boxCollider;
+    Material mat;
 
-    [SerializeField]
-    private SphereCollider col;
-
-    [SerializeField]
-    private GameObject go_rock;
-    [SerializeField]
-    private GameObject go_debris;
-
-    public void Mining()
+    void Awake()
     {
-        hp--;
-
-        if (hp <= 0)
-            Destruction();
+        rigid = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<BoxCollider>();
+        mat = GetComponent<MeshRenderer>().material;
     }
 
-    private void Destruction()
+    void OnTriggerEnter(Collider other)
     {
-        col.enabled = false;
-        Destroy(go_rock);
-
-        go_debris.SetActive(true);
-        Destroy(go_debris, destroyTime);
+        if (other.tag == "Melee")
+        {
+            Weapon weapon = other.GetComponent<Weapon>();
+            curHealth -= weapon.damage;
+            StartCoroutine(OnDamage());
+            Debug.Log("Melee : " + curHealth);
+        }
     }
 
+    IEnumerator OnDamage()
+    {
+        yield return null;
+        if (curHealth <= 0)
+        {
+            gameObject.layer = 6;
+            Destroy(gameObject, 1);
+        }
+    }
 }

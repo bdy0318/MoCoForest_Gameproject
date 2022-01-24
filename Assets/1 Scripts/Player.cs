@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public int coin;
-<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< HEAD
     public int smallrock;
@@ -21,8 +20,6 @@ public class Player : MonoBehaviour
 >>>>>>> Stashed changes
     public int stone; // 채집한 돌 개수
 >>>>>>> main
-=======
->>>>>>> parent of 66f9c20 (add enemymoster)
     float hAxis;
     float vAxis;
     bool rDown;
@@ -33,6 +30,7 @@ public class Player : MonoBehaviour
 <<<<<<< HEAD
     bool sDown1;
     bool sDown2;
+    bool sDown3;
     bool fDown;
 
     bool isJump;
@@ -144,13 +142,10 @@ public class Player : MonoBehaviour
 =======
         sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
-<<<<<<< HEAD
         sDown3 = Input.GetButtonDown("Swap3");
 >>>>>>> Stashed changes
         tDown = Input.GetButtonDown("Inventory"); // Tab key
 >>>>>>> main
-=======
->>>>>>> parent of 66f9c20 (add enemymoster)
     }
     // 플레이어 이동
     void Move()
@@ -246,7 +241,15 @@ public class Player : MonoBehaviour
             anim.SetTrigger("doSwap");
             isSwap = true;
 
-            Invoke("SwapOut", 0.4f);
+            Invoke("SwapOut", 0.1f);
+        }
+        if (sDown3 && !isJump)
+        {
+            if (equipWeapon != null)
+            {
+                equipWeapon.gameObject.SetActive(false);
+                equipWeapon = null;
+            }
         }
     }
 
@@ -428,6 +431,19 @@ public class Player : MonoBehaviour
 
         private void OnTriggerEnter(Collider other)
         {
+            if(other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            switch (item.type)
+            {
+                case Item.Type.Rock:
+                    smallrock += item.value;
+                    if (smallrock > maxsmallrock)
+                        smallrock = maxsmallrock;
+                    break;
+            }
+            Destroy(other.gameObject);
+        }
             if (other.gameObject.transform.position.y < transform.position.y)
             {
                 anim.SetBool("isJump", false); // 점프 중지
