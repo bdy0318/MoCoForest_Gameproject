@@ -5,29 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    #region Singleton
-    public static Player instance;
-
-    private void Awake()
-    {
-        if (instance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-    #endregion Singleton
     public float speed;
     public int coin;
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     public int smallrock;
     public int maxsmallrock;
 
 =======
+=======
+    public int smallrock;
+    public int maxsmallrock;
+
+>>>>>>> Stashed changes
     public int stone; // 채집한 돌 개수
 >>>>>>> main
     float hAxis;
@@ -49,6 +39,14 @@ public class Player : MonoBehaviour
     bool isJump; 
 >>>>>>> main
     bool isCollision;
+<<<<<<< Updated upstream
+=======
+    bool sDown1;
+    bool sDown2;
+    bool sDown3;
+    bool fDown;
+
+>>>>>>> Stashed changes
     bool isSwap;
     bool isFireReady;
 
@@ -72,19 +70,34 @@ public class Player : MonoBehaviour
     Shop shop;
 =======
     public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
+    public GameObject[] weapon;
+    public bool[] hasWeapons;
+    
+
+    GameObject nearObject;
+    GameObject nearObject_w;
+    Weapon equipWeapon;
+    int equipWeaponIndex = -1;
+    float fireDelay;
 
     public Shop shop;
     public Inventory inventory;
 
     Vector3 moveVec;
+<<<<<<< Updated upstream
     GameObject nearObject;
 >>>>>>> main
+=======
+>>>>>>> Stashed changes
     Rigidbody rigid;
     Animator anim;
 
     private void Update()
     {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
         GetInput();
         Move();
         Turn();
@@ -93,7 +106,11 @@ public class Player : MonoBehaviour
         Swap();
         Interaction();
         weaponInteraction();
+<<<<<<< Updated upstream
 =======
+=======
+
+>>>>>>> Stashed changes
         // 카트레이싱 중에는 실행X
         if(SceneManager.GetActiveScene().name != "CartRacing")
         {
@@ -116,23 +133,33 @@ public class Player : MonoBehaviour
         iDown = Input.GetButtonDown("Interaction"); // E key
         iDown1 = Input.GetButtonDown("weaponInteraction"); //Q key
         sDown = Input.GetButtonDown("Submit"); // Enter or Space key
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
         sDown3 = Input.GetButtonDown("Swap3");
 =======
+=======
+        sDown1 = Input.GetButtonDown("Swap1");
+        sDown2 = Input.GetButtonDown("Swap2");
+        sDown3 = Input.GetButtonDown("Swap3");
+>>>>>>> Stashed changes
         tDown = Input.GetButtonDown("Inventory"); // Tab key
 >>>>>>> main
     }
     // 플레이어 이동
     void Move()
     {
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         if (!isTalking)
         {
 =======
         if (!isTalking && !isInventory)
 >>>>>>> main
+=======
+        if (!isTalking && !isInventory) 
+>>>>>>> Stashed changes
             moveVec = new Vector3(hAxis, 0, vAxis).normalized;
             if (isSwap)
                 moveVec = Vector3.zero;
