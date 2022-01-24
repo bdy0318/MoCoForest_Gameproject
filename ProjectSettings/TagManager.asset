@@ -3,7 +3,6 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-<<<<<<< Updated upstream
   tags:
   - Ground
   - Shop
@@ -18,9 +17,6 @@ TagManager:
   - NPC
   - Deco
 >>>>>>> main
-=======
-  tags: []
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -28,15 +24,11 @@ TagManager:
   - Enemy
   - Water
   - UI
-<<<<<<< Updated upstream
 <<<<<<< HEAD
   - EnemyDead
 =======
   - Npc
 >>>>>>> main
-=======
-  - 
->>>>>>> Stashed changes
   - 
   - 
   - 
