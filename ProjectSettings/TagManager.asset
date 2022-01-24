@@ -8,17 +8,18 @@ TagManager:
   - Shop
   - Shopping
   - ShopItem
-  - Rock
   - Weapon
   - Melee
+  - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
-  - 
+  - EnemyDead
   - 
   - 
   - 
