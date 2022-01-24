@@ -1,14 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    #region Singleton
+    public static Player instance;
+
+    private void Awake()
+    {
+        if (instance)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        rigid = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    #endregion Singleton
     public float speed;
     public int coin;
+<<<<<<< HEAD
     public int smallrock;
     public int maxsmallrock;
 
+=======
+    public int stone; // 채집한 돌 개수
+>>>>>>> main
     float hAxis;
     float vAxis;
     bool rDown;
@@ -16,19 +37,26 @@ public class Player : MonoBehaviour
     bool iDown;
     bool iDown1;
     bool sDown;
+<<<<<<< HEAD
     bool sDown1;
     bool sDown2;
     bool sDown3;
     bool fDown;
 
     bool isJump;
+=======
+    bool tDown;
+    bool isJump; 
+>>>>>>> main
     bool isCollision;
     bool isSwap;
     bool isFireReady;
 
     public bool isShopping;
     public bool isTalking;
+    public bool isInventory;
     public int[] hasItem;
+<<<<<<< HEAD
     public GameObject[] weapon;
     public bool[] hasWeapons;
     
@@ -42,17 +70,21 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     Shop shop;
+=======
+    public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
+
+    public Shop shop;
+    public Inventory inventory;
+
+    Vector3 moveVec;
+    GameObject nearObject;
+>>>>>>> main
     Rigidbody rigid;
     Animator anim;
 
-    void Awake()
-    {
-        rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-    }
-
     private void Update()
     {
+<<<<<<< HEAD
         GetInput();
         Move();
         Turn();
@@ -61,6 +93,17 @@ public class Player : MonoBehaviour
         Swap();
         Interaction();
         weaponInteraction();
+=======
+        // 카트레이싱 중에는 실행X
+        if(SceneManager.GetActiveScene().name != "CartRacing")
+        {
+            GetInput();
+            Move();
+            Turn();
+            Jump();
+            Interaction();
+        }
+>>>>>>> main
     }
     // 입력
     void GetInput()
@@ -73,15 +116,23 @@ public class Player : MonoBehaviour
         iDown = Input.GetButtonDown("Interaction"); // E key
         iDown1 = Input.GetButtonDown("weaponInteraction"); //Q key
         sDown = Input.GetButtonDown("Submit"); // Enter or Space key
+<<<<<<< HEAD
         sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
         sDown3 = Input.GetButtonDown("Swap3");
+=======
+        tDown = Input.GetButtonDown("Inventory"); // Tab key
+>>>>>>> main
     }
     // 플레이어 이동
     void Move()
     {
+<<<<<<< HEAD
         if (!isTalking)
         {
+=======
+        if (!isTalking && !isInventory)
+>>>>>>> main
             moveVec = new Vector3(hAxis, 0, vAxis).normalized;
             if (isSwap)
                 moveVec = Vector3.zero;
@@ -90,7 +141,11 @@ public class Player : MonoBehaviour
             moveVec = new Vector3(0, 0, 0).normalized; // 대화 중인 경우
 
         // 물체 충돌 시 이동 제한
+<<<<<<< HEAD
         if (!isCollision && !isTalking)
+=======
+        if(!isCollision && !isTalking && !isInventory)
+>>>>>>> main
             transform.position += moveVec * speed * Time.deltaTime;
 
         anim.SetBool("isWalk", moveVec != Vector3.zero);
@@ -99,13 +154,21 @@ public class Player : MonoBehaviour
     // 플레이어 회전
     void Turn()
     {
+<<<<<<< HEAD
         if (!isTalking)
+=======
+        if(!isTalking && !isInventory)
+>>>>>>> main
             transform.LookAt(Vector3.MoveTowards(transform.position, transform.position + moveVec, Time.deltaTime));
     }
     // 점프
     void Jump()
     {
+<<<<<<< HEAD
         if (jDown && !isJump && !isTalking )
+=======
+        if (jDown && !isJump && !isTalking && !isInventory) //npc근처에서 점프 금지
+>>>>>>> main
         {
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
@@ -185,9 +248,14 @@ public class Player : MonoBehaviour
     void Interaction()
     {
         // 상점 상호작용
+        // 
         // 상점 입장
+<<<<<<< HEAD
 
         if (iDown && nearObject != null && !isJump && !isShopping && !isTalking)
+=======
+        if (iDown && nearObject != null && !isJump && !isShopping && !isTalking && !isInventory)
+>>>>>>> main
         {
             if (nearObject.tag == "Shop")
             {
@@ -202,14 +270,16 @@ public class Player : MonoBehaviour
                 shop.Close();
             }
         }
+        // 상점 구매
+        //
         // 상점 아이템 상호작용
-        else if (iDown && isShopping && nearObject != null && nearObject.tag == "ShopItem" && !isTalking)
+        else if (iDown && isShopping && nearObject != null && nearObject.tag == "ShopItem" && !isTalking && !isInventory && !shop.isSell)
         {
             int index = nearObject.GetComponent<Item>().value;
             shop.Buy(index);
         }
         // 상점 아이템 구매 확인 대사 넘김
-        else if (sDown && isShopping && isTalking)
+        else if (sDown && isShopping && isTalking && !shop.isSell)
         {
             // 구매 여부 선택지 이후 대사 넘김
             if (shop.isNext && shop.isClose && !shop.answerPanel.activeSelf)
@@ -228,6 +298,70 @@ public class Player : MonoBehaviour
                 shop.ShowAnswer(); 
             }
         }
+        // 상점 아이템 판매
+        //
+        // 판매 입장
+        if (iDown && isShopping && nearObject != null && nearObject.tag == "Shop" && !isTalking && !isInventory)
+        {
+            shop.Sell();
+        }
+        else if (sDown && isShopping && isTalking && shop.isSell)
+        {
+            // 판매할 아이템 종류 선택 표시(돌맹이 or 인벤토리)
+            if (!shop.isClose && shop.isNext)
+            {
+                shop.ShowSellAnswer();
+            }
+            // 아이템 판매 선택
+            else if (!shop.isClose && !shop.isNext) {
+                // 판매 아이템 종류 선택 시
+                if(shop.sellChoosePanel.activeSelf)
+                {
+                    shop.CloseSellAnswer();
+                }
+                // 아이템 판매 개수 선택 시
+                else if (!shop.sellCountPanel.activeSelf && !isInventory)
+                {
+                    shop.isNext = true;
+                    shop.isClose = true;
+                }
+            }
+            // 판매 종료
+            else if (shop.isClose && shop.isNext && !shop.sellCountPanel.activeSelf)
+            {
+                shop.Close();
+            }
+        }
+
+        // 인벤토리
+        //
+        // 플레이어 이야기 중인 경우
+        if(isTalking)
+        {
+            inventory.btnInventory.SetActive(false);
+        }
+        // 인벤토리가 열리는 경우
+        else if(!isTalking && !isInventory)
+        {
+            inventory.btnInventory.SetActive(true);
+        }
+        // tab 키 사용시 인벤토리 열기
+        if(tDown && !isTalking && !isInventory)
+        {
+            inventory.ShowInventory();
+        }
+        // tab 키 사용시 인벤토리 닫기
+        else if(tDown && !isTalking && inventory.panelInventroy.activeSelf)
+        {
+            isInventory = false;
+            inventory.ShowBtn();
+        }
+        // 인벤토리 선택 버튼
+        else if(sDown && isInventory && inventory.btnInventory.activeSelf)
+        {
+            isInventory = false;
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -269,15 +403,23 @@ public class Player : MonoBehaviour
         
     private void OnTriggerStay(Collider other)
     {
-        // 상점 출입 지점 인식
-        if (other.tag == "Shop" && !isShopping)
+        // 상점 출입, 판매 지점 인식
+        if (other.tag == "Shop")
         {
             nearObject = other.gameObject;
+            if (!isTalking)
+                shop.SetEPosition(other);
+            else
+                shop.showKeyE.SetActive(false);
         }
         // 상점 아이템 상호작용 가능 여부 인식
         else if (other.tag == "ShopItem" && isShopping)
         {
             nearObject = other.gameObject;
+            if (!isTalking)
+                shop.SetEPosition(other);
+            else
+                shop.showKeyE.SetActive(false);
         }
             
         else if (other.tag == "Weapon")
@@ -297,9 +439,10 @@ public class Player : MonoBehaviour
             nearObject = null;
         }
         // 상점 이용 시 주변에 상호작응 가능한 아이템 없는 경우
-        else if (other.tag == "ShopItem" && nearObject != null)
+        else if ((other.tag == "ShopItem" || other.tag == "Shop") && nearObject != null)
         {
             nearObject = null;
+            shop.showKeyE.SetActive(false);
         }
             
         else if (other.tag == "Weapon")
