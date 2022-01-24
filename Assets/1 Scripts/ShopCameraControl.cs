@@ -43,12 +43,5 @@ public class ShopCameraControl : MonoBehaviour
                 closeupCam.transform.position = Vector3.Lerp(closeupCam.transform.position, clPos, Time.deltaTime);
             }
 
-            if (!isShopping && Vector3.Distance(clPos, closeupCam.transform.position) < 0.05f)
-                isLerping = false;
-            else if (isSelling && Vector3.Distance(clPos, closeupCam.transform.position) < 0.05f)
-                isLerping = false;
-            else if (isShopping && !isSelling && Vector3.Distance(shPos, shoppingCam.transform.position) < 0.05f)
-                isLerping = false;
-        }
     }
 }
