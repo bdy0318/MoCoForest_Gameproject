@@ -22,7 +22,6 @@ public class NPC : MonoBehaviour
 
     public TalkManager talkManager;
     public Quest quest;
-    public Player player;
 
     private void Start()
     {
@@ -34,7 +33,7 @@ public class NPC : MonoBehaviour
     void Update()
     {
         //E키를 눌러 npc와 대화
-        if (Input.GetKeyDown(KeyCode.E) && nearNpc)
+        if (Input.GetKeyDown(KeyCode.E) && nearNpc && !quest.endingManager.gameObject.activeSelf)
         {
             if (!quest.player.isTalking)
                 quest.IsQuestNPC(id);
@@ -76,6 +75,12 @@ public class NPC : MonoBehaviour
         // 퀘스트 5번 진행 시 대화 종료 후 카트레이싱 시작
         if (!isNpcTalking && !quest.isComplete && quest.nowQuest == 5 && id == 5000)
             quest.QuestScene();
+        // 엔딩 진행
+        else if(!isNpcTalking && quest.isComplete && quest.nowQuest == 6 && id == 6000)
+        {
+            quest.endingManager.gameObject.SetActive(true);
+            quest.player.isTalking = true;
+        }
         nameText.text = Name;
     }
 
