@@ -4,11 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/2 Scenes/MocoForest.unity
-    guid: 5661d614e3a856d469befde53e7277e6
-  - enabled: 1
-    path: Assets/2 Scenes/CartRacing.unity
-    guid: d21005ad08dffad4f80aef56e2a5c3d8
+  m_Scenes: []
   m_configObjects: {}
