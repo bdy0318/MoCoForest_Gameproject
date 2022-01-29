@@ -14359,11 +14359,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e50deee74e47e0146b47d6aec2f02894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  damage: 1
+  type: 0
+  damage: 10
   rate: 0.4
-  meleeArea: {fileID: 0}
-  trailEffect: {fileID: 0}
+  meleeArea: {fileID: 500496195}
+  trailEffect: {fileID: 1933738501}
+--- !u!65 &500496195
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500496192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &501645854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38094,6 +38107,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
+      propertyPath: m_TagString
+      value: Melee
+      objectReference: {fileID: 0}
     - target: {fileID: 2285952976136801637, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -57337,7 +57354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371358075351244952, guid: 0ed10297cace3384882e9c4b5543050a, type: 3}
       propertyPath: m_Constraints
-      value: 126
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: 6371358075351244954, guid: 0ed10297cace3384882e9c4b5543050a, type: 3}
       propertyPath: m_Radius
