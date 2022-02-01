@@ -27703,6 +27703,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3721978834771105178, guid: 4b10cb2d452ab5e42a881b5db22a97e2, type: 3}
+      propertyPath: FailedTalk3.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721978834771105178, guid: 4b10cb2d452ab5e42a881b5db22a97e2, type: 3}
+      propertyPath: FailedTalk3.Array.data[0]
+      value: "\uC544\uC27D\uB2E4..!! \uB2E4\uC2DC \uD574\uBCF4\uBA74 \uC774\uAE38
+        \uC218 \uC788\uC744\uAC70\uC57C!!"
+      objectReference: {fileID: 0}
     - target: {fileID: 4093814598585694350, guid: 4b10cb2d452ab5e42a881b5db22a97e2, type: 3}
       propertyPath: m_Name
       value: QuestManager

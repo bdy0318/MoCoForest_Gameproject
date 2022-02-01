@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
             // 두더지 잡기 후 설정
             if(quest.nowQuest == 4 && !quest.isComplete && quest.isMapChanged)
             {
+                AudioManager.Instance.Play(0);
                 quest.isMapChanged = false;
                 player.gameObject.SetActive(true);
                 // 게임에서 진 경우
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
         //두더지 잡기 중
         else if(SceneManager.GetActiveScene().name == "Whack_A_Mole")
         {
+            AudioManager.Instance.Stop();
             player.gameObject.SetActive(false);
             quest.isMapChanged = true;
         }
