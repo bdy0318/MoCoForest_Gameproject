@@ -66,6 +66,17 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MocoForest")
         {
             playerPos = player.transform.position; // 플레이어 위치 저장
+
+            // 두더지 잡기 후 설정
+            if(quest.nowQuest == 4 && !quest.isComplete && quest.isMapChanged)
+            {
+                quest.isMapChanged = false;
+                player.gameObject.SetActive(true);
+                // 게임에서 진 경우
+                if (!quest.isGameWin)
+                    quest.FourthFailed();
+            }
+
             // 카트레이싱 후 설정
             if (quest.nowQuest == 5 && !quest.isComplete && quest.isMapChanged)
             {
@@ -88,6 +99,12 @@ public class GameManager : MonoBehaviour
                 player.isTalking = false;
                 isEndNextTitle = false;
             }
+        }
+        //두더지 잡기 중
+        else if(SceneManager.GetActiveScene().name == "Whack_A_Mole")
+        {
+            player.gameObject.SetActive(false);
+            quest.isMapChanged = true;
         }
         // 카트레이싱 중
         else if (SceneManager.GetActiveScene().name == "CartRacing")

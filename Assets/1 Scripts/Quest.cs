@@ -161,7 +161,7 @@ public class Quest : MonoBehaviour
     public void FourthQuest()
     {
         // 퀘스트 완료
-        if (nowQuest == 4 && !isComplete && true) // true -> 몇점 이상 달성하면
+        if (nowQuest == 4 && !isComplete && isGameWin) 
         {
             talkManager.talkData[4000] = npcTalk.completeTalk3;
             isComplete = true;
@@ -171,7 +171,7 @@ public class Quest : MonoBehaviour
         }
         else if (nowQuest == 4 && !isComplete) // 게임 진행
         {
-            // 게임으로 이동
+            talkManager.talkData[4000] = npcTalk.questTalk3;
         }
         // 퀘스트 받기 전
         else if (nowQuest == 3 && isComplete)
@@ -228,11 +228,26 @@ public class Quest : MonoBehaviour
     // 퀘스트 장면 전환
     public void QuestScene()
     {
+        // 4번 퀘스트 진행 시 두더지 잡기
+        if (nowQuest == 4)
+            SceneManager.LoadScene("Whack_A_Mole");
         // 5번 퀘스트 진행 시 카트레이싱
         if(nowQuest == 5)
             SceneManager.LoadScene("CartRacing");
     }
-
+    
+    // 4번 퀘스트 실패 시 대사 출력
+    public void FourthFailed()
+    {
+        player.isTalking = true;
+        npc[3].pressE.SetActive(false);
+        talkManager.talkData[4000] = npcTalk.FailedTalk3;
+        npc[3].nameText.text = npc[3].Name;
+        npc[3].pressE.SetActive(false);
+        npc[3].DialogueText.text = talkManager.talkData[4000][0];
+        npc[3].NpcPannel.SetActive(true);
+        StartCoroutine(Second());
+    }
     // 5번 퀘스트 실패 시 대사 출력
     public void FifthFailed()
     {
@@ -250,6 +265,7 @@ public class Quest : MonoBehaviour
     IEnumerator Second()
     {
         yield return new WaitForSeconds(2f);
+        npc[3].NpcPannel.SetActive(false);
         npc[4].NpcPannel.SetActive(false);
         player.isTalking = false;
     }

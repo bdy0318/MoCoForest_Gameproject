@@ -4,9 +4,11 @@ using UnityEngine;
 
 //지하에 대기, 지상에 대기, 지하->지상 이동, 지상->지하 이동
 public enum MoleState { UnderGround = 0, OnGround, MoveUp, MoveDown}
-
+//두더지 종류(기본, 점수-, 시간(점수)+)
 public class MoleFSM : MonoBehaviour
 {
+    [SerializeField]
+    private GameController gameController;  //콤보 초기화
     [SerializeField]
     private float waitTimeOnGround;     //지면에 올라와서 내려가기까지 기다리는 시간
     [SerializeField]
@@ -15,6 +17,8 @@ public class MoleFSM : MonoBehaviour
     private float limitMaxY;            //올라올 수 있는 최대 y 위치
 
     private Movement movement;      //위/아래 이동을 위한 Movement
+
+    public int MoleType;            //두더지 종류 - 0: Normal, 1: Dog, 2: Cat
 
     // 두더지의 현재 상태(set은 MoleFSM 클래스 내부에서만)
     public MoleState MoleState { private set; get; }
@@ -93,11 +97,19 @@ public class MoleFSM : MonoBehaviour
             //두더지의 y위치가 limitMinY에 도달하면 반복문 중지
             if(transform.position.y <= limitMinY)
             {
-                //UnderGroud 상태로 변경
-                ChangeState(MoleState.UnderGround);
+                break;
             }
 
             yield return null;
         }
+
+        //// 망치로 때리지 못하고 땅속으로 들어간 두더지의 속성이 일반이면 콤보 초기화
+        //if(MoleType == 0)   
+        //{
+        //    gameController.Combo = 0;
+        //}
+
+        //UnderGround 상태로 변경
+        ChangeState(MoleState.UnderGround);
     }
 }

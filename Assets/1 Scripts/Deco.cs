@@ -76,7 +76,7 @@ public class Deco : MonoBehaviour
         if(player.selectItem != null) //아이템이 선택되면
         {
             // 선택 아이템 인덱스
-            int index = player.selectItem.GetComponent<Item>().value; //itemIndex = index;
+            int index = player.selectItem.GetComponent<Item>().value; 
             itemIndex = index;
 
             if (itemIndex >= 0) //돌 제외
@@ -89,7 +89,7 @@ public class Deco : MonoBehaviour
                 //데코존 파괴, 퀘스트 진행도
                 quest.thirdQuest += 1;
                 decoZone.SetActive(false);
-                //Destroy(decoZone); 왜 destroy를 쓰면 퀘스트가 넘어가지 않을까..?
+                
             }
         }
     }
