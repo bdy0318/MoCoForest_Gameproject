@@ -24,7 +24,7 @@ public class TalkManager : MonoBehaviour
 
     public Dictionary<int, string[]> talkData;
 
-    void GenrateData()
+    public void GenrateData()
     {
         talkData.Add(1000, new string[] { "안녀엉! 동물마을에 온 걸 환여엉해.",
                                           "인간 친구가 우리 마을에 오다니 신기하다아" });

@@ -224,12 +224,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.transform.position.y < transform.position.y)
+        if (!GameManager.Instance.quest.isMapChanged && other.gameObject.transform.position.y < transform.position.y)
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
 
-        if (other.gameObject.tag == "Ground")
+        if (!GameManager.Instance.quest.isMapChanged && other.gameObject.tag == "Ground")
         {
             anim.SetBool("isJump", false); // 점프 중지
         }

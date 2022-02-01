@@ -24,6 +24,7 @@ public class Quest : MonoBehaviour
     public Inventory inventory;
     public Player player;
     public TalkManager talkManager;
+    public Ending endingManager;
     public QuestTalk npcTalk;
     public List<NPC> npc;
 
@@ -211,7 +212,6 @@ public class Quest : MonoBehaviour
         {
             talkManager.talkData[6000] = npcTalk.completeTalk5;
             isComplete = true;
-            // 엔딩으로 연결
         }
         else if (nowQuest == 6 && !isComplete)
         {

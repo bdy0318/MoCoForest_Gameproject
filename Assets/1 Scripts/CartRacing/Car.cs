@@ -10,6 +10,7 @@ public class Car : MonoBehaviour
     public Transform[] target;
     public Text numberText;
     public GameObject textPanel;
+    public GameObject guidePanel; // 조작 가이드 UI
     public Text endText;
     public Image endPanel;
     public float carSpeed; // 최대 속도
@@ -250,6 +251,7 @@ public class Car : MonoBehaviour
                 numberText.text = num.ToString();
         }
         textPanel.SetActive(false);
+        guidePanel.SetActive(false);
         isRaceStart = true;
     }
 
