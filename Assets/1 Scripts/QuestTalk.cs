@@ -23,6 +23,8 @@ public class QuestTalk : MonoBehaviour
     [TextArea(1, 2)]
     public string[] questTalk3;
     [TextArea(1, 2)]
+    public string[] FailedTalk3;
+    [TextArea(1, 2)]
     public string[] completeTalk3;
     // Äù½ºÆ® 5
     [TextArea(1, 2)]

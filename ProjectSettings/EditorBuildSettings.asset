@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2 Scenes/CartRacing.unity
     guid: d21005ad08dffad4f80aef56e2a5c3d8
+  - enabled: 1
+    path: Assets/2 Scenes/Whack_A_Mole.unity
+    guid: 8c5c6c8a98266db49994821a53f0d664
+  - enabled: 1
+    path: Assets/2 Scenes/Mole_GameOver.unity
+    guid: 62c744dd86ee01340afc35c769f7d7d9
   m_configObjects: {}

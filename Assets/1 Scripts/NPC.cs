@@ -73,6 +73,9 @@ public class NPC : MonoBehaviour
     {
         Talk(id);
         NpcPannel.SetActive(isNpcTalking);
+        // 퀘스트 4번 진행 시 대화 종료 후 두더지 잡기 시작
+        if (!isNpcTalking && !quest.isComplete && quest.nowQuest == 4 && id == 4000)
+            quest.QuestScene();
         // 퀘스트 5번 진행 시 대화 종료 후 카트레이싱 시작
         if (!isNpcTalking && !quest.isComplete && quest.nowQuest == 5 && id == 5000)
             quest.QuestScene();
