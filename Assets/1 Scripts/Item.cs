@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum Type { Column, Light, Rock, Candle, Jug, Pot, Weapon};
+    public enum Type { Column, Light, Book, Bottle, Candle, Jug, Pot };
     public Type type;
     public int value;
+    public string itemName;
 }

@@ -8,18 +8,16 @@ TagManager:
   - Shop
   - Shopping
   - ShopItem
-  - Weapon
-  - Melee
-  - Enemy
-  - Item
+  - NPC
+  - Deco
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - 
   - Water
   - UI
-  - EnemyDead
+  - Npc
   - 
   - 
   - 
