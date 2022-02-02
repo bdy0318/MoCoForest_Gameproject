@@ -4,31 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/2 Scenes/MocoForest.unity
-    guid: 5661d614e3a856d469befde53e7277e6
-  - enabled: 1
-    path: Assets/2 Scenes/CartRacing.unity
-    guid: d21005ad08dffad4f80aef56e2a5c3d8
-  - enabled: 1
-    path: Assets/2 Scenes/ObjectDestroy.unity
-    guid: 8f60fc9a04f6ccc4e99834e673ecc218
-  - enabled: 1
-    path: Assets/2 Scenes/Whack_A_Mole.unity
-    guid: 8c5c6c8a98266db49994821a53f0d664
-  - enabled: 1
-    path: Assets/2 Scenes/Mole_GameOver.unity
-    guid: 62c744dd86ee01340afc35c769f7d7d9
-  - enabled: 1
-    path: Assets/2 Scenes/Prologue.unity
-    guid: 002e97cfbfc0915429fdf2ddd2780be6
-=======
-    path: Assets/2 Scenes/SampleScene.unity
-    guid: afac193574269174eab53c83a22d26da
-  - enabled: 1
-    path: Assets/2 Scenes/StartScene.unity
-    guid: d1a07801329317b41813bbadd9836e2f
->>>>>>> mining
+  m_Scenes: []
   m_configObjects: {}
