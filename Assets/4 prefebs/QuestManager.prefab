@@ -47,8 +47,15 @@ MonoBehaviour:
   inventory: {fileID: 0}
   player: {fileID: 0}
   talkManager: {fileID: 0}
+  endingManager: {fileID: 0}
   npcTalk: {fileID: 3721978834771105178}
-  npc: []
+  npc:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   questList:
   - "\uB3CC 3\uAC1C \uCC44\uC9D1 \uD6C4 \uC591\uC5D0\uAC8C \uC8FC\uAE30"
   - "\uB291\uB300\uC5D0\uAC8C \uC0C1\uC810\uC5D0\uC11C \uAD6C\uB9E4\uD55C \uC120\uBB3C
@@ -58,8 +65,12 @@ MonoBehaviour:
   - "\uCE74\uD2B8\uB808\uC774\uC2F1\uC5D0\uC11C \uB108\uAD6C\uB9AC \uC774\uAE30\uAE30"
   - "\uB9C8\uC744\uC5D0 \uCE68\uC785\uD55C \uAD34\uBB3C \uBB3C\uB9AC\uCE58\uAE30"
   nowQuest: 0
-  thirdQuest: 0
   isComplete: 0
+  isMapChanged: 0
+  isGameWin: 0
+  thirdQuest: 0
+  Decoration: {fileID: 0}
+  QuestIcon: {fileID: 0}
 --- !u!114 &3721978834771105178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +138,7 @@ MonoBehaviour:
     \uB098\uB791 \uC798 \uB180\uC544\uC8FC\uB294 \uC560\uAC00 \uC88B\uC544."
   - "\uADF8\uB7EC\uB2C8\uAE4C \uB098\uB791 \uB450\uB354\uC9C0 \uC7A1\uAE30 \uD574\uC11C
     \uC774\uAE30\uBA74 \uB9C8\uC744 \uC8FC\uBBFC\uC73C\uB85C \uD5C8\uB77D\uD574\uC904\uAC8C!!"
+  FailedTalk3: []
   completeTalk3:
   - "\uADF8\uC815\uB3C4\uBA74 \uB2E4\uB978 \uB9C8\uC744 \uC8FC\uBBFC\uB4E4\uACFC
     \uC5B4\uC6B8\uB9AC\uAE30\uC5D0 \uCDA9\uBD84\uD55C \uC2E4\uB825\uC774\uC57C!"
