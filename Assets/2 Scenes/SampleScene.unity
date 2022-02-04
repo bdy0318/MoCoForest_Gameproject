@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.82107735, g: 0.911249, b: 0.90104085, a: 1}
+  m_IndirectSpecularColor: {r: 0.8210329, g: 0.911249, b: 0.90102303, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2918,6 +2918,7 @@ MonoBehaviour:
   talkIndex: 0
   NpcPannel: {fileID: 281084821}
   pressE: {fileID: 1761264078}
+  pressEText: {fileID: 0}
   DialogueText: {fileID: 1043403138}
   nameText: {fileID: 1141645581}
   nearNpc: 0
@@ -5000,6 +5001,7 @@ MonoBehaviour:
   talkIndex: 0
   NpcPannel: {fileID: 281084821}
   pressE: {fileID: 1761264078}
+  pressEText: {fileID: 0}
   DialogueText: {fileID: 1043403138}
   nameText: {fileID: 1141645581}
   nearNpc: 0
@@ -22925,6 +22927,7 @@ MonoBehaviour:
   talkIndex: 0
   NpcPannel: {fileID: 281084821}
   pressE: {fileID: 1761264078}
+  pressEText: {fileID: 0}
   DialogueText: {fileID: 1043403138}
   nameText: {fileID: 1141645581}
   nearNpc: 0
@@ -29832,6 +29835,7 @@ MonoBehaviour:
   talkIndex: 0
   NpcPannel: {fileID: 281084821}
   pressE: {fileID: 1761264078}
+  pressEText: {fileID: 0}
   DialogueText: {fileID: 1043403138}
   nameText: {fileID: 1141645581}
   nearNpc: 0
@@ -44368,6 +44372,7 @@ MonoBehaviour:
   talkIndex: 0
   NpcPannel: {fileID: 281084821}
   pressE: {fileID: 1761264078}
+  pressEText: {fileID: 0}
   DialogueText: {fileID: 1043403138}
   nameText: {fileID: 1141645581}
   nearNpc: 0
@@ -47555,6 +47560,7 @@ MonoBehaviour:
   talkIndex: 0
   NpcPannel: {fileID: 281084821}
   pressE: {fileID: 1761264078}
+  pressEText: {fileID: 0}
   DialogueText: {fileID: 1043403138}
   nameText: {fileID: 1141645581}
   nearNpc: 0

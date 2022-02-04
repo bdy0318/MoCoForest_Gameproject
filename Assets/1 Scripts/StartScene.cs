@@ -10,7 +10,7 @@ public class StartScene : MonoBehaviour
     public void ClickStart()
     {
         Debug.Log("·Îµù");
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("Prologue");
     }
 
     public void ClickExit()
