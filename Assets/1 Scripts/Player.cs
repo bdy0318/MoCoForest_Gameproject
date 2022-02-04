@@ -229,7 +229,12 @@ public class Player : MonoBehaviour
             anim.SetBool("isJump", false); // 점프 중지
         }
 
-        else if(other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
+        if (!GameManager.Instance.quest.isMapChanged && other.gameObject.tag == "Ground")
+        {
+            anim.SetBool("isJump", false); // 점프 중지
+        }
+
+        else if (other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
             isCollision = true; // 맵에 충돌 중
     }
 
