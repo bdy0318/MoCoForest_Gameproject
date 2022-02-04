@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     public bool isShopping;
     public bool isTalking;
     public bool isInventory;
+    public bool isMenu;
     public int[] hasItem;
     public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
 
@@ -94,7 +95,7 @@ public class Player : MonoBehaviour
     // 점프
     void Jump()
     {
-        if (jDown && !isJump && !isTalking && !isInventory) //npc근처에서 점프 금지
+        if (jDown && !isJump && !isTalking && !isInventory && !isMenu) //npc근처에서 점프 금지
         {
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
@@ -212,6 +213,14 @@ public class Player : MonoBehaviour
             isInventory = false;
         }
 
+        // 메뉴
+        //
+        // 메뉴 버튼 선택
+        if(sDown && !Menu.Instance.pausePanel.activeSelf && Menu.Instance.isEnd && isMenu)
+        {
+            isMenu = false;
+            Menu.Instance.isEnd = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
