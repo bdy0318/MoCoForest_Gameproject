@@ -221,7 +221,6 @@ public class Player : MonoBehaviour
             isJump = false; // 점프 활성
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (!GameManager.Instance.quest.isMapChanged && other.gameObject.transform.position.y < transform.position.y)
@@ -233,7 +232,6 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
-
         else if (other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
             isCollision = true; // 맵에 충돌 중
     }
