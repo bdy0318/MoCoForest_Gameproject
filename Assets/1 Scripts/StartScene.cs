@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StartScene : MonoBehaviour
 {
-    public string sceneName = "SampleScene";
+    public string sceneName = "MocoForest";
 
     public void ClickStart()
     {

@@ -26,6 +26,11 @@ public class Enemy : MonoBehaviour
 
         Invoke("ChaseStart", 2);
     }
+
+    private void Start()
+    {
+        target = GameManager.Instance.player.transform;
+    }
     void ChaseStart()
     {
         isChase = true;

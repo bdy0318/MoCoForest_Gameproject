@@ -723,10 +723,17 @@ MonoBehaviour:
   speed: 3
   coin: 0
   stone: 0
+  smallrock: 0
+  maxsmallrock: 3
   isShopping: 0
   isTalking: 0
   isInventory: 0
+  isMenu: 0
   hasItem: 00000000000000000000000000000000000000000000000000000000
+  weapon:
+  - {fileID: 0}
+  - {fileID: 0}
+  hasWeapons: 0000
   selectItem: {fileID: 0}
   shop: {fileID: 0}
   inventory: {fileID: 0}

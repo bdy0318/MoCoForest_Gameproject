@@ -67,6 +67,11 @@ public class GameManager : MonoBehaviour
         {
             playerPos = player.transform.position; // 플레이어 위치 저장
 
+            if(quest.nowQuest == 0 && quest.isMapChanged)
+            {
+                quest.isMapChanged = false;
+            }
+
             // 두더지 잡기 후 설정
             if(quest.nowQuest == 4 && !quest.isComplete && quest.isMapChanged)
             {
@@ -144,7 +149,8 @@ public class GameManager : MonoBehaviour
                                           "나는 인간이 우리 마을에 오는게 마음에 안들어."};
 
             isEndNextTitle = true;
-            SceneManager.LoadScene("MocoForest"); // 마을 씬으로 이동
+            quest.isMapChanged = true;
+            SceneManager.LoadScene("StartScene"); // 타이틀로 이동
         }
     }
 
