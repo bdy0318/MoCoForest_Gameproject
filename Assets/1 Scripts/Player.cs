@@ -24,20 +24,33 @@ public class Player : MonoBehaviour
     public float speed;
     public int coin;
     public int stone; // 채집한 돌 개수
+    public int smallrock;
+    public int maxsmallrock;
+
     float hAxis;
     float vAxis;
     bool rDown;
     bool jDown;
     bool iDown;
+    bool iDown1;
     bool sDown;
+    bool sDown1;
+    bool sDown2;
+    bool sDown3;
+    bool fDown;
+
     bool tDown;
     bool isJump; 
     bool isCollision;
+    bool isSwap;
+    bool isFireReady;
     public bool isShopping;
     public bool isTalking;
     public bool isInventory;
     public bool isMenu;
     public int[] hasItem;
+    public GameObject[] weapon;
+    public bool[] hasWeapons;
     public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
 
     public Shop shop;
@@ -45,6 +58,10 @@ public class Player : MonoBehaviour
 
     Vector3 moveVec;
     GameObject nearObject;
+    GameObject nearObject_w;
+    Weapon equipWeapon;
+    int equipWeaponIndex = -1;
+    float fireDelay;
     Rigidbody rigid;
     Animator anim;
 
@@ -57,7 +74,10 @@ public class Player : MonoBehaviour
             Move();
             Turn();
             Jump();
+            Attack();
+            Swap();
             Interaction();
+            weaponInteraction();
         }
     }
     // 입력
@@ -67,9 +87,14 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         rDown = Input.GetButton("Run");
         jDown = Input.GetButtonDown("Jump");
+        fDown = Input.GetButtonDown("Fire1");
         iDown = Input.GetButtonDown("Interaction"); // E key
+        iDown1 = Input.GetButtonDown("weaponInteraction"); //Q key
         sDown = Input.GetButtonDown("Submit"); // Enter or Space key
         tDown = Input.GetButtonDown("Inventory"); // Tab key
+        sDown1 = Input.GetButtonDown("Swap1");
+        sDown2 = Input.GetButtonDown("Swap2");
+        sDown3 = Input.GetButtonDown("Swap3");
     }
     // 플레이어 이동
     void Move()
@@ -100,6 +125,76 @@ public class Player : MonoBehaviour
             anim.SetBool("isJump", true);
             anim.SetTrigger("doJump");
             isJump = true;
+        }
+    }
+
+    void Attack()
+    {
+        if (equipWeapon == null)
+            return;
+
+        fireDelay += Time.deltaTime;
+        isFireReady = equipWeapon.rate < fireDelay;
+
+        if (fDown && isFireReady && !isSwap)
+        {
+            equipWeapon.Use();
+            anim.SetTrigger("doSwing");
+            fireDelay = 0;
+        }
+
+    }
+
+    void Swap()
+    {
+        if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump)
+            return;
+        if (sDown2 && (!hasWeapons[1] || equipWeaponIndex == 1) && !isJump)
+            return;
+        int weaponIndex = -1;
+        if (sDown1) weaponIndex = 0;
+        if (sDown2) weaponIndex = 1;
+
+        if ((sDown1 || sDown2) && !isJump)
+        {
+            if (equipWeapon != null)
+                equipWeapon.gameObject.SetActive(false);
+            equipWeaponIndex = weaponIndex;
+            equipWeapon = weapon[weaponIndex].GetComponent<Weapon>();
+            equipWeapon.gameObject.SetActive(true);
+
+            anim.SetTrigger("doSwap");
+            isSwap = true;
+
+            Invoke("SwapOut", 0.1f);
+        }
+        if (sDown3 && !isJump)
+        {
+            if (equipWeapon != null)
+            {
+                equipWeapon.gameObject.SetActive(false);
+                equipWeapon = null;
+            }
+        }
+    }
+
+    void SwapOut()
+    {
+        isSwap = false;
+    }
+
+    void weaponInteraction()
+    {
+        //무기획득
+        if (iDown1 && nearObject_w != null)
+        {
+            if (nearObject_w.tag == "Weapon")
+            {
+                Item item = nearObject_w.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
+                Destroy(nearObject_w);
+            }
         }
     }
 
@@ -233,6 +328,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            switch (item.type)
+            {
+                case Item.Type.Rock:
+                    smallrock += item.value;
+                    if (smallrock > maxsmallrock)
+                        smallrock = maxsmallrock;
+                    break;
+            }
+            Destroy(other.gameObject);
+        }
+
         if (!GameManager.Instance.quest.isMapChanged && other.gameObject.transform.position.y < transform.position.y)
         {
             anim.SetBool("isJump", false); // 점프 중지
@@ -266,6 +375,10 @@ public class Player : MonoBehaviour
             else
                 shop.showKeyE.SetActive(false);
         }
+        else if (other.tag == "Weapon")
+        {
+            nearObject_w = other.gameObject;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -283,6 +396,10 @@ public class Player : MonoBehaviour
         {
             nearObject = null;
             shop.showKeyE.SetActive(false);
+        }
+        else if (other.tag == "Weapon")
+        {
+            nearObject_w = null;
         }
     }
 }
