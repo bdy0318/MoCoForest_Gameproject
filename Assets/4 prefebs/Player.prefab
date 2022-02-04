@@ -724,7 +724,7 @@ MonoBehaviour:
   coin: 0
   stone: 0
   smallrock: 0
-  maxsmallrock: 0
+  maxsmallrock: 3
   isShopping: 0
   isTalking: 0
   isInventory: 0

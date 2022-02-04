@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = equipWeapon.rate < fireDelay;
 
-        if (fDown && isFireReady && !isSwap)
+        if (fDown && isFireReady && !isSwap && !isTalking && !isInventory)
         {
             equipWeapon.Use();
             anim.SetTrigger("doSwing");
@@ -337,6 +337,7 @@ public class Player : MonoBehaviour
                     smallrock += item.value;
                     if (smallrock > maxsmallrock)
                         smallrock = maxsmallrock;
+                    stone++;
                     break;
             }
             Destroy(other.gameObject);
