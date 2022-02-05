@@ -37,9 +37,8 @@ public class Player : MonoBehaviour
     bool sDown1;
     bool sDown2;
     bool sDown3;
-    bool fDown;
-
     bool tDown;
+    bool fDown;
     bool isJump; 
     bool isCollision;
     bool isSwap;
@@ -52,6 +51,8 @@ public class Player : MonoBehaviour
     public GameObject[] weapon;
     public bool[] hasWeapons;
     public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
+    public GameObject[] weapon;
+    public bool[] hasWeapons;
 
     public Shop shop;
     public Inventory inventory;
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour
         iDown1 = Input.GetButtonDown("weaponInteraction"); //Q key
         sDown = Input.GetButtonDown("Submit"); // Enter or Space key
         tDown = Input.GetButtonDown("Inventory"); // Tab key
-        sDown1 = Input.GetButtonDown("Swap1");
+        sDown1 = Input.GetButtonDown("Swap1"); //숫자1번
         sDown2 = Input.GetButtonDown("Swap2");
         sDown3 = Input.GetButtonDown("Swap3");
     }
@@ -144,7 +145,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
     void Swap()
     {
         if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump)
@@ -325,7 +325,6 @@ public class Player : MonoBehaviour
             isJump = false; // 점프 활성
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Item")
@@ -352,7 +351,7 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
-        else if(other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
+        else if (other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
             isCollision = true; // 맵에 충돌 중
     }
 

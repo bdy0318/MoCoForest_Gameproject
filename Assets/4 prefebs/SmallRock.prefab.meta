@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/4 prefebs/SmallRock.prefab.meta
 guid: 1c642a2ec9046924db4e3a5da3977009
 PrefabImporter:
+=======
+guid: 379f88efb9f730a4c81a1611afb5b3f0
+DefaultImporter:
+>>>>>>> main:Assets/2 Scenes/SampleScene.meta~f4bf6a0460332ea40f235ddbba4243736df10de4.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
