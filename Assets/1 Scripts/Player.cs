@@ -35,12 +35,14 @@ public class Player : MonoBehaviour
     bool sDown2;
     bool sDown3;
     bool tDown;
+    bool fDown;
     bool isJump; 
     bool isCollision;
     public bool isShopping;
     public bool isTalking;
     public bool isInventory;
     bool isSwap;
+    bool isFireReady;
     public int[] hasItem;
     public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
     public GameObject[] weapon;
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
     GameObject nearObject_w;
     Weapon equipWeapon;
     int equipWeaponIndex = -1;
+    float fireDelay;
     Rigidbody rigid;
     Animator anim;
 
@@ -66,6 +69,7 @@ public class Player : MonoBehaviour
             Move();
             Turn();
             Jump();
+            Attack();
             Swap();
             Interaction();
             weaponInteraction();
@@ -78,6 +82,7 @@ public class Player : MonoBehaviour
         vAxis = Input.GetAxisRaw("Vertical");
         rDown = Input.GetButton("Run");
         jDown = Input.GetButtonDown("Jump");
+        fDown = Input.GetButtonDown("Fire1");
         iDown = Input.GetButtonDown("Interaction"); // E key
         iDown1 = Input.GetButtonDown("weaponInteraction"); //Q key
         sDown = Input.GetButtonDown("Submit"); // Enter or Space key
@@ -118,6 +123,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Attack()
+    {
+        if (equipWeapon == null)
+            return;
+
+        fireDelay += Time.deltaTime;
+        isFireReady = equipWeapon.rate < fireDelay;
+
+        if (fDown && isFireReady && !isSwap)
+        {
+            equipWeapon.Use();
+            anim.SetTrigger("doSwing");
+            fireDelay = 0;
+        }
+
+    }
     void Swap()
     {
         if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump)
