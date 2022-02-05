@@ -51,8 +51,6 @@ public class Player : MonoBehaviour
     public GameObject[] weapon;
     public bool[] hasWeapons;
     public GameObject selectItem; // 플레이어가 인벤토리에서 선택한 아이템
-    public GameObject[] weapon;
-    public bool[] hasWeapons;
 
     public Shop shop;
     public Inventory inventory;
@@ -332,10 +330,8 @@ public class Player : MonoBehaviour
             Item item = other.GetComponent<Item>();
             switch (item.type)
             {
-                case Item.Type.Rock:
+                case Item.Type.Stone:
                     smallrock += item.value;
-                    if (smallrock > maxsmallrock)
-                        smallrock = maxsmallrock;
                     stone++;
                     break;
             }
