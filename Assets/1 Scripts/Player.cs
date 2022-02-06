@@ -340,7 +340,7 @@ public class Player : MonoBehaviour
             Item item = other.GetComponent<Item>();
             switch (item.type)
             {
-                case Item.Type.Rock:
+                case Item.Type.Stone:
                     smallrock += item.value;
                     if (smallrock > maxsmallrock)
                         smallrock = maxsmallrock;
