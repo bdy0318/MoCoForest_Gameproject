@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth;
     public int curHealth;
+    public int num;
     public Transform target;
     public bool isChase;
 
@@ -71,10 +72,14 @@ public class Enemy : MonoBehaviour
         yield return null;
         if (curHealth <= 0)
         {
-            gameObject.layer = 6;
+            gameObject.layer = 7;
             isChase = false;
             anim.SetTrigger("doDie");
-            Destroy(gameObject, 1);
+            yield return new WaitForSeconds(0.8f);
+            // 퀘스트 진행도 저장
+            if (GameManager.Instance.quest.nowQuest == 6)
+                GameManager.Instance.quest.sixthQuest[num] = true;
+            gameObject.SetActive(false);
         }
     }
 }

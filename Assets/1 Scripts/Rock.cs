@@ -34,8 +34,8 @@ public class Rock : MonoBehaviour
         yield return null;
         if (curHealth <= 0)
         {
-            gameObject.layer = 6;
-            Destroy(gameObject, 1);
+            gameObject.layer = 7;
+            gameObject.SetActive(false);
         }
     }
 }

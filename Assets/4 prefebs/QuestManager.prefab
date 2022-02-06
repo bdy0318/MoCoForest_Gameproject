@@ -61,7 +61,7 @@ MonoBehaviour:
   - "\uB291\uB300\uC5D0\uAC8C \uC0C1\uC810\uC5D0\uC11C \uAD6C\uB9E4\uD55C \uC120\uBB3C
     \uC8FC\uAE30"
   - "\uB9C8\uC744 \uAFB8\uBBF8\uAE30({0}/3)"
-  - "\uB450\uB354\uC9C0 \uC7A1\uAE30\uC5D0\uC11C {0}\uC810 \uC774\uC0C1 \uB2EC\uC131\uD558\uAE30"
+  - "\uB450\uB354\uC9C0 \uC7A1\uAE30\uC5D0\uC11C 5000\uC810 \uC774\uC0C1 \uB2EC\uC131\uD558\uAE30"
   - "\uCE74\uD2B8\uB808\uC774\uC2F1\uC5D0\uC11C \uB108\uAD6C\uB9AC \uC774\uAE30\uAE30"
   - "\uB9C8\uC744\uC5D0 \uCE68\uC785\uD55C \uAD34\uBB3C \uBB3C\uB9AC\uCE58\uAE30"
   nowQuest: 0
@@ -69,6 +69,7 @@ MonoBehaviour:
   isMapChanged: 0
   isGameWin: 0
   thirdQuest: 0
+  sixthQuest: 000000
   Decoration: {fileID: 0}
   QuestIcon: {fileID: 0}
 --- !u!114 &3721978834771105178

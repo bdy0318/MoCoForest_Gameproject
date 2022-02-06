@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -37,8 +39,9 @@ public class Player : MonoBehaviour
     bool sDown1;
     bool sDown2;
     bool sDown3;
-    bool tDown;
     bool fDown;
+
+    bool tDown;
     bool isJump; 
     bool isCollision;
     bool isSwap;
@@ -55,19 +58,22 @@ public class Player : MonoBehaviour
     public Shop shop;
     public Inventory inventory;
 
+    public PlayableDirector prologue;
+    public TimelineAsset time;
+
     Vector3 moveVec;
     GameObject nearObject;
     GameObject nearObject_w;
-    Weapon equipWeapon;
-    int equipWeaponIndex = -1;
+    public Weapon equipWeapon;
+    public int equipWeaponIndex = -1;
     float fireDelay;
     Rigidbody rigid;
     Animator anim;
 
     private void Update()
     {
-        // 카트레이싱 중에는 실행X
-        if(SceneManager.GetActiveScene().name != "CartRacing")
+        // 모코 포레스트에서만 실행
+        if(SceneManager.GetActiveScene().name == "MocoForest")
         {
             GetInput();
             Move();
@@ -91,20 +97,20 @@ public class Player : MonoBehaviour
         iDown1 = Input.GetButtonDown("weaponInteraction"); //Q key
         sDown = Input.GetButtonDown("Submit"); // Enter or Space key
         tDown = Input.GetButtonDown("Inventory"); // Tab key
-        sDown1 = Input.GetButtonDown("Swap1"); //숫자1번
+        sDown1 = Input.GetButtonDown("Swap1");
         sDown2 = Input.GetButtonDown("Swap2");
         sDown3 = Input.GetButtonDown("Swap3");
     }
     // 플레이어 이동
     void Move()
     {
-        if (!isTalking && !isInventory)
+        if (!isTalking && !isInventory && !isMenu)
             moveVec = new Vector3(hAxis, 0, vAxis).normalized;
         else
             moveVec = new Vector3(0, 0, 0).normalized; // 대화 중인 경우
         
         // 물체 충돌 시 이동 제한
-        if(!isCollision && !isTalking && !isInventory)
+        if(!isCollision && !isTalking && !isInventory && !isMenu)
             transform.position += moveVec * speed * Time.deltaTime;
 
         anim.SetBool("isWalk", moveVec != Vector3.zero);
@@ -113,7 +119,7 @@ public class Player : MonoBehaviour
     // 플레이어 회전
     void Turn()
     {
-        if(!isTalking && !isInventory)
+        if(!isTalking && !isInventory && !isMenu)
             transform.LookAt(Vector3.MoveTowards(transform.position, transform.position + moveVec, Time.deltaTime));
     }
     // 점프
@@ -135,7 +141,7 @@ public class Player : MonoBehaviour
         fireDelay += Time.deltaTime;
         isFireReady = equipWeapon.rate < fireDelay;
 
-        if (fDown && isFireReady && !isSwap && !isTalking && !isInventory)
+        if (fDown && isFireReady && !isSwap && !isTalking && !isInventory && !isMenu)
         {
             equipWeapon.Use();
             anim.SetTrigger("doSwing");
@@ -143,6 +149,7 @@ public class Player : MonoBehaviour
         }
 
     }
+
     void Swap()
     {
         if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump)
@@ -152,6 +159,7 @@ public class Player : MonoBehaviour
         int weaponIndex = -1;
         if (sDown1) weaponIndex = 0;
         if (sDown2) weaponIndex = 1;
+        if (sDown3) weaponIndex = -1;
 
         if ((sDown1 || sDown2) && !isJump)
         {
@@ -171,6 +179,7 @@ public class Player : MonoBehaviour
             if (equipWeapon != null)
             {
                 equipWeapon.gameObject.SetActive(false);
+                equipWeaponIndex = weaponIndex;
                 equipWeapon = null;
             }
         }
@@ -191,7 +200,7 @@ public class Player : MonoBehaviour
                 Item item = nearObject_w.GetComponent<Item>();
                 int weaponIndex = item.value;
                 hasWeapons[weaponIndex] = true;
-                Destroy(nearObject_w);
+                nearObject_w.SetActive(false);
             }
         }
     }
@@ -201,7 +210,7 @@ public class Player : MonoBehaviour
         // 상점 상호작용
         // 
         // 상점 입장
-        if (iDown && nearObject != null && !isJump && !isShopping && !isTalking && !isInventory)
+        if (iDown && nearObject != null && !isJump && !isShopping && !isTalking && !isInventory && !isMenu)
         {
             if(nearObject.tag == "Shop")
             {
@@ -290,7 +299,7 @@ public class Player : MonoBehaviour
             inventory.btnInventory.SetActive(true);
         }
         // tab 키 사용시 인벤토리 열기
-        if(tDown && !isTalking && !isInventory)
+        if(tDown && !isTalking && !isInventory && !isMenu)
         {
             inventory.ShowInventory();
         }
@@ -323,6 +332,7 @@ public class Player : MonoBehaviour
             isJump = false; // 점프 활성
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Item")
@@ -330,12 +340,15 @@ public class Player : MonoBehaviour
             Item item = other.GetComponent<Item>();
             switch (item.type)
             {
-                case Item.Type.Stone:
+                case Item.Type.Rock:
                     smallrock += item.value;
+                    if (smallrock > maxsmallrock)
+                        smallrock = maxsmallrock;
                     stone++;
                     break;
             }
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
+            StartCoroutine(StoneRespawn(other.gameObject));
         }
 
         if (!GameManager.Instance.quest.isMapChanged && other.gameObject.transform.position.y < transform.position.y)
@@ -347,7 +360,7 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
-        else if (other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
+        else if(other.gameObject.tag != "Shop" && other.gameObject.tag != "Shopping" && other.gameObject.tag != "ShopItem")
             isCollision = true; // 맵에 충돌 중
     }
 
@@ -397,5 +410,17 @@ public class Player : MonoBehaviour
         {
             nearObject_w = null;
         }
+    }
+
+    IEnumerator StoneRespawn(GameObject rock)
+    {
+        yield return new WaitForSeconds(3f);
+        Transform parent = rock.transform.parent.transform;
+        yield return new WaitUntil(() => Vector3.Distance(transform.position, parent.position) > 10);
+        GameObject child = parent.GetChild(0).gameObject;
+        child.SetActive(true);
+        child.layer = 3;
+        yield return new WaitForSeconds(1f);
+        rock.SetActive(true);
     }
 }

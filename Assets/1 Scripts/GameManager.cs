@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
 using UnityEngine.SceneManagement;
 
 
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviour
     public Quest quest;
     public TalkManager talkManager;
     public GameObject coinPanel;
+    public GameObject hammer;
+    public GameObject handGun;
+    public List<GameObject> decoObj;
+    public List<int> decoList;
 
     public Text playerCoinTxt;
 
@@ -44,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         // 시작 시 마을 브금 재생
         AudioManager.Instance.Play(0);
-        AudioManager.Instance.FadeInMusic();
+        AudioManager.Instance.FadeInMusic(0.3f);
         //퀘스트 쉽게 넘어가기
         player.coin = 50000;
         player.stone = 50;
@@ -67,13 +73,64 @@ public class GameManager : MonoBehaviour
         {
             playerPos = player.transform.position; // 플레이어 위치 저장
 
+            // 게임 시작
             if(quest.nowQuest == 0 && quest.isMapChanged)
             {
                 quest.isMapChanged = false;
             }
 
+            // 데코레이션 미션 이전 로드 후
+            if (quest.nowQuest < 3 && SaveLoadManager.Instance.isLoad) // 로드 후
+            {
+                while(decoObj.Count != 0)
+                {
+                    Destroy(decoObj[0]);
+                    decoObj.RemoveAt(0);
+                    decoList.RemoveAt(0);
+                }
+            }
+
+            // 데코레이션 미션 이후 로드 후
+            if (quest.nowQuest >= 3 && SaveLoadManager.Instance.isLoad) // 로드 후
+            {
+                for (int i = 0; i < decoObj.Count; i++)
+                {
+                    if (decoObj[i] == null)
+                    {
+                        decoObj.RemoveAt(i);
+                        decoList.RemoveAt(i);
+                    }
+                }
+            }
+
+            // 로드 시
+            if (SaveLoadManager.Instance.isLoad)
+            {
+                if (quest.nowQuest == 0 || quest.isComplete)
+                    quest.QuestIcon.transform.position = quest.npc[quest.nowQuest].transform.position + new Vector3(0, 3, 0);
+                else
+                    quest.QuestIcon.transform.position = quest.npc[quest.nowQuest - 1].transform.position + new Vector3(0, 3, 0);
+                quest.QuestIcon.gameObject.SetActive(true);
+
+                // 맵 획득한 무기 파괴
+                if (player.hasWeapons.Length != 0)
+                {
+                    if (player.hasWeapons[0])
+                        hammer.SetActive(false);
+                    else
+                        hammer.SetActive(true);
+
+                    if (player.hasWeapons[1])
+                        handGun.SetActive(false);
+                    else
+                        handGun.SetActive(true);
+                }
+
+                SaveLoadManager.Instance.isLoad = false;
+            }
+
             // 두더지 잡기 후 설정
-            if(quest.nowQuest == 4 && !quest.isComplete && quest.isMapChanged)
+            if (quest.nowQuest == 4 && !quest.isComplete && quest.isMapChanged)
             {
                 AudioManager.Instance.Play(0);
                 quest.isMapChanged = false;
@@ -81,24 +138,66 @@ public class GameManager : MonoBehaviour
                 // 게임에서 진 경우
                 if (!quest.isGameWin)
                     quest.FourthFailed();
+                for (int i = 0; i < decoObj.Count; i++)
+                {
+                    decoObj[i].SetActive(true);
+                    SaveLoadManager.Instance.deco[decoList[i]].isComplete = true;
+                    SaveLoadManager.Instance.deco[decoList[i]].itemIndex = decoObj[i].GetComponent<Item>().value;
+                }
+                quest.QuestIcon.transform.position = quest.npc[3].transform.position + new Vector3(0, 3, 0);
+
+                // 맵 획득한 무기 파괴
+                if (player.hasWeapons.Length != 0)
+                {
+                    if (player.hasWeapons[0])
+                        hammer.SetActive(false);
+                    else
+                        hammer.SetActive(true);
+
+                    if (player.hasWeapons[1])
+                        handGun.SetActive(false);
+                    else
+                        handGun.SetActive(true);
+                }
             }
 
             // 카트레이싱 후 설정
             if (quest.nowQuest == 5 && !quest.isComplete && quest.isMapChanged)
             {
                 AudioManager.Instance.Play(0);
-                AudioManager.Instance.FadeInMusic();
+                AudioManager.Instance.FadeInMusic(0.3f);
                 quest.isMapChanged = false;
                 player.gameObject.SetActive(true);
                 // 게임에서 진 경우
                 if (!quest.isGameWin)
                     quest.FifthFailed();
+                for (int i = 0; i < decoObj.Count; i++)
+                {
+                    decoObj[i].SetActive(true);
+                    SaveLoadManager.Instance.deco[decoList[i]].isComplete = true;
+                    SaveLoadManager.Instance.deco[decoList[i]].itemIndex = decoObj[i].GetComponent<Item>().value;
+                }
+                quest.QuestIcon.transform.position = quest.npc[4].transform.position + new Vector3(0, 3, 0);
+
+                // 맵 획득한 무기 파괴
+                if (player.hasWeapons.Length != 0)
+                {
+                    if (player.hasWeapons[0])
+                        hammer.SetActive(false);
+                    else
+                        hammer.SetActive(true);
+
+                    if (player.hasWeapons[1])
+                        handGun.SetActive(false);
+                    else
+                        handGun.SetActive(true);
+                }
             }
             // 엔딩 종료 후 플레이어 위치 초기화
             else if(isEndNextTitle)
             {
                 AudioManager.Instance.Play(0);
-                AudioManager.Instance.FadeInMusic();
+                AudioManager.Instance.FadeInMusic(0.3f);
                 player.transform.position = playerInitialPos;
                 player.transform.eulerAngles = new Vector3(0, 0, 0);
                 player.gameObject.SetActive(true);
@@ -112,14 +211,28 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.Stop();
             player.gameObject.SetActive(false);
             quest.isMapChanged = true;
+            for (int i = 0; i < decoObj.Count; i++)
+            {
+                decoObj[i].SetActive(false);
+            }
         }
         // 카트레이싱 중
         else if (SceneManager.GetActiveScene().name == "CartRacing")
         {
             if(AudioManager.Instance.source.clip == AudioManager.Instance.clips[0] && AudioManager.Instance.flag)
                 AudioManager.Instance.FadeOutMusic();
+            else if(!AudioManager.Instance.flag && AudioManager.Instance.source.volume < 0.1f)
+            {
+                AudioManager.Instance.Play(1);
+                AudioManager.Instance.FadeInMusic(0.6f);
+            }
+
             player.gameObject.SetActive(false);
             quest.isMapChanged = true;
+            for (int i = 0; i < decoObj.Count; i++)
+            {
+                decoObj[i].SetActive(false);
+            }
         }
         // 엔딩 후 오브젝트 파괴, 설정 초기화
         else if (SceneManager.GetActiveScene().name == "ObjectDestroy")
@@ -129,14 +242,20 @@ public class GameManager : MonoBehaviour
             player.coin = 0;
             player.stone = 0;
             player.selectItem = null;
+            player.equipWeapon.gameObject.SetActive(false);
+            player.equipWeapon = null;
             for (int i = 0; i < player.hasItem.Length; i++)
                 player.hasItem[i] = 0;
+            for (int i = 0; i < player.hasWeapons.Length; i++)
+                player.hasWeapons[i] = false;
 
             quest.nowQuest = 0;
             quest.isComplete = false;
             quest.isGameWin = false;
             quest.isMapChanged = false;
             quest.thirdQuest = 0;
+            for (int i = 0; i < quest.sixthQuest.Length; i++)
+                quest.sixthQuest[i] = false;
 
             talkManager.talkData[1000] = new string[] { "안녀엉! 동물마을에 온 걸 환여엉해.",
                                           "인간 친구가 우리 마을에 오다니 신기하다아" };
@@ -148,9 +267,25 @@ public class GameManager : MonoBehaviour
             talkManager.talkData[6000] = new string[] { "나한테 가까이 다가오지 마. 날 해칠꺼지?",
                                           "나는 인간이 우리 마을에 오는게 마음에 안들어."};
 
+            while(decoObj.Count != 0)
+            {
+                Destroy(decoObj[0]);
+                decoObj.RemoveAt(0);
+                decoList.RemoveAt(0);
+            }
+
             isEndNextTitle = true;
             quest.isMapChanged = true;
             SceneManager.LoadScene("StartScene"); // 타이틀로 이동
+        }
+
+        // 프롤로그 시작
+        else if(SceneManager.GetActiveScene().name == "Prologue" && !player.gameObject.activeSelf)
+        {
+            player.gameObject.SetActive(true);
+            player.prologue = FindObjectOfType<PlayableDirector>();
+            TrackAsset temp = player.time.GetOutputTrack(6);
+            player.prologue.SetGenericBinding(temp, player.GetComponent<Animator>());
         }
     }
 

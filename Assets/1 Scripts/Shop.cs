@@ -222,7 +222,7 @@ public class Shop : MonoBehaviour
     public void AnswerSellStone()
     {
         itemIndex = -1;
-        price = 20;
+        price = 100;
         ItemSellCount(enterPlayer.stone);
         if (Input.GetMouseButtonUp(0))
         {

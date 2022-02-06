@@ -35,6 +35,7 @@ public class Quest : MonoBehaviour
     public bool isGameWin;
 
     public int thirdQuest; // 세번째 퀘스트 마을 꾸미기 진행도 표시
+    public bool[] sixthQuest; // 여섯번째 퀘스트 진행도
     public GameObject Decoration; //세번째 퀘스트 시작할 때 꾸미기 기능 활성화
     public TextMesh QuestIcon; //물음표 아이콘
 
@@ -208,10 +209,11 @@ public class Quest : MonoBehaviour
     public void SixthQuest()
     {
         // 퀘스트 완료
-        if (nowQuest == 6 && !isComplete && true) // true -> 괴물 물리치면
+        if (nowQuest == 6 && !isComplete && sixthQuest[0] && sixthQuest[1] && sixthQuest[2])
         {
             talkManager.talkData[6000] = npcTalk.completeTalk5;
             isComplete = true;
+            QuestIcon.gameObject.SetActive(false);
         }
         else if (nowQuest == 6 && !isComplete)
         {
