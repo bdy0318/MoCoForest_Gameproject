@@ -94,13 +94,13 @@ public class Player : MonoBehaviour
     // 플레이어 이동
     void Move()
     {
-        if (!isTalking && !isInventory)
+        if (!isTalking && !isInventory && !isSwap)
             moveVec = new Vector3(hAxis, 0, vAxis).normalized;
         else
             moveVec = new Vector3(0, 0, 0).normalized; // 대화 중인 경우
         
         // 물체 충돌 시 이동 제한
-        if(!isCollision && !isTalking && !isInventory)
+        if(!isCollision && !isTalking && !isInventory && !isSwap)
             transform.position += moveVec * speed * Time.deltaTime;
 
         anim.SetBool("isWalk", moveVec != Vector3.zero);
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
     }
     void Swap()
     {
-        if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump)
+        if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump )
             return;
         if (sDown2 && (!hasWeapons[1] || equipWeaponIndex == 1) && !isJump)
             return;
@@ -313,12 +313,24 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!GameManager.Instance.quest.isMapChanged && other.gameObject.transform.position.y < transform.position.y)
+        if (other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            switch (item.type)
+            {
+                case Item.Type.Stone:
+                    stone += item.value;
+                    break;
+            }
+            Destroy(other.gameObject);
+        }
+
+        else if(!GameManager.Instance.quest.isMapChanged && other.gameObject.transform.position.y < transform.position.y)
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
 
-        if (!GameManager.Instance.quest.isMapChanged && other.gameObject.tag == "Ground")
+        else if(!GameManager.Instance.quest.isMapChanged && other.gameObject.tag == "Ground")
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
