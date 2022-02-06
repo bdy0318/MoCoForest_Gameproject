@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
+
 
 public enum FadeState { FadeIn = 0, FadeOut}
 
@@ -17,11 +19,14 @@ public class FadeInOut : MonoBehaviour
     Image           image;
     FadeState       fadeState;
 
+    public TimeLine timeline;
+    public PrologueSignal prologueSignal;
+
     private void Awake()
     {
         image = GetComponent<Image>();
 
-        OnFade(FadeState.FadeOut);
+        OnFade(FadeState.FadeIn);
     }
 
     public void OnFade(FadeState state)
@@ -32,6 +37,7 @@ public class FadeInOut : MonoBehaviour
         {
             case FadeState.FadeIn:
                 StartCoroutine(Fade(1, 0));
+                timeline.StartPrologue();
                 break;
             case FadeState.FadeOut:
                 StartCoroutine(Fade(0, 1));
@@ -58,6 +64,16 @@ public class FadeInOut : MonoBehaviour
 
             yield return null;
         }
+
+
+        if(prologueSignal.isPrologueFinish)        // 프롤로그 끝
+            SceneManager.LoadScene("MocoForest");   
+
+        
+
+
+
+
 
     }
 }
