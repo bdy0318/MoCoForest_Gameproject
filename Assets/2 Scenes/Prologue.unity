@@ -52769,6 +52769,7 @@ GameObject:
   - component: {fileID: 1848665302}
   - component: {fileID: 1848665305}
   - component: {fileID: 1848665304}
+  - component: {fileID: 1848665306}
   m_Layer: 0
   m_Name: ProlougeTimeLine
   m_TagString: Untagged
@@ -52786,7 +52787,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 8f400afe88f7db24d9b8c66294803e8c, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -52940,6 +52941,19 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!114 &1848665305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848665301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64764fa8f13238f4b88c3fde9bbf3654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: {fileID: 236504667}
+--- !u!114 &1848665306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
