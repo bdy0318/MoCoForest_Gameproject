@@ -16,6 +16,8 @@ public class TimeLine : MonoBehaviour
 
     public void StartPrologue()
     {
+        AudioManager.Instance.Play(1);
+        AudioManager.Instance.FadeInMusic();
         director.Play();
     }
 

@@ -8,11 +8,11 @@ public class PrologueSignal : MonoBehaviour
     public bool isPrologueFinish;
     public FadeInOut fade;
  
-    public void PrologueFinish()
+    void PrologueFinish()
     {
         isPrologueFinish = true;
+        AudioManager.Instance.FadeOutMusic();
         fade.OnFade(FadeState.FadeOut);
     }
-
 
 }

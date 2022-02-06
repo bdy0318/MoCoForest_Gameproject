@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
         //퀘스트 쉽게 넘어가기
         player.coin = 50000;
         player.stone = 50;
-        
     }
 
     private void Update()

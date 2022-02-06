@@ -66,10 +66,14 @@ public class FadeInOut : MonoBehaviour
         }
 
 
-        if(prologueSignal.isPrologueFinish)        // 프롤로그 끝
-            SceneManager.LoadScene("MocoForest");   
+        if (prologueSignal.isPrologueFinish)        // 프롤로그 끝
+        {
+            SceneManager.LoadScene("MocoForest");
+        }        
+            
 
-        
+
+
 
 
 
