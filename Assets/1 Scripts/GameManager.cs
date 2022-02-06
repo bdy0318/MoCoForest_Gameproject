@@ -242,7 +242,8 @@ public class GameManager : MonoBehaviour
             player.coin = 0;
             player.stone = 0;
             player.selectItem = null;
-            player.equipWeapon.gameObject.SetActive(false);
+            if(player.equipWeapon != null)
+                player.equipWeapon.gameObject.SetActive(false);
             player.equipWeapon = null;
             for (int i = 0; i < player.hasItem.Length; i++)
                 player.hasItem[i] = 0;
