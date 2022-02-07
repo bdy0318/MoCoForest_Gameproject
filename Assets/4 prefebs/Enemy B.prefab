@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   curHealth: 10
+  num: 1
   target: {fileID: 0}
   isChase: 0
 --- !u!1001 &1974531801137934858

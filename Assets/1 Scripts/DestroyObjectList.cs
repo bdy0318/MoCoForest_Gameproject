@@ -9,6 +9,7 @@ public class DestroyObjectList : MonoBehaviour
     public GameObject[] playerList;
     public GameObject[] questList;
     public GameObject[] gameManagerList;
+    public GameObject[] saveLoadManagerList;
 
     Player player;
     Quest quest;
@@ -37,5 +38,11 @@ public class DestroyObjectList : MonoBehaviour
             player.transform.position = GameManager.Instance.playerPos;
         GameManager.Instance.coinPanel = gameManagerList[0];
         GameManager.Instance.playerCoinTxt = gameManagerList[1].GetComponent<Text>();
+        GameManager.Instance.hammer = gameManagerList[2];
+        GameManager.Instance.handGun = gameManagerList[3];
+
+        // 세이브 로드 매니저
+        for (int i = 0; i < saveLoadManagerList.Length; i++)
+            SaveLoadManager.Instance.deco[i] = saveLoadManagerList[i].GetComponent<Deco>();
     }
 }

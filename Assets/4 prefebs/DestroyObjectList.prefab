@@ -60,3 +60,9 @@ MonoBehaviour:
   gameManagerList:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  saveLoadManagerList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

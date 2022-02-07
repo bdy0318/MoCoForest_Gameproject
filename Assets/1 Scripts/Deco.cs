@@ -16,14 +16,20 @@ public class Deco : MonoBehaviour
     public GameObject showKey; //아이템 선택 tab키, 설치 e키
     public Text showKeyText;
     public int itemIndex;
+    public int num;
 
     public bool nearDecoZone;
+    public bool isComplete;
 
     public Player player;
     public Inventory inventory;
     public Quest quest;
 
-
+    private void Start()
+    {
+        player = GameManager.Instance.player;
+        quest = GameManager.instance.quest;
+    }
 
     void Update()
     {
@@ -93,12 +99,19 @@ public class Deco : MonoBehaviour
             }
         }
     }
-    private void Decorate()
+    public void Decorate()
     {
         //위치, 크기 변경
         GameObject newObject = Instantiate(decoObj[itemIndex],decoPos.position, decoPos.rotation);
         newObject.transform.localScale = new Vector3(2, 2, 2);
-
+        if(newObject.GetComponent<Item>().type == Item.Type.Pot)
+        {
+            newObject.transform.GetChild(0).localScale = new Vector3(2, 2, 2);
+        }
+        newObject.AddComponent<DontDestroyOnLoad>();
+        GameManager.Instance.decoObj.Add(newObject);
+        GameManager.Instance.decoList.Add(num);
+        isComplete = true;
     }
 
 

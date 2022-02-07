@@ -33,7 +33,7 @@ public class Rock : MonoBehaviour
         if (curHealth <= 0)
         {
             gameObject.layer = 7;
-            Destroy(gameObject, 1);
+            gameObject.SetActive(false);
         }
     }
 }

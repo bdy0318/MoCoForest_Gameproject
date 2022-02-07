@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class NPC : MonoBehaviour
@@ -33,7 +34,7 @@ public class NPC : MonoBehaviour
     void Update()
     {
         //E키를 눌러 npc와 대화
-        if (Input.GetKeyDown(KeyCode.E) && nearNpc && !quest.endingManager.gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.E) && nearNpc && !quest.endingManager.gameObject.activeSelf && !quest.player.isInventory)
         {
             if (!quest.player.isTalking)
                 quest.IsQuestNPC(id);
@@ -45,7 +46,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") 
+        if (other.tag == "Player" && SceneManager.GetActiveScene().name != "Prologue") 
         {
             pressEText.text = "대화를 하려면 [E]를 누르세요";
             pressE.SetActive(true);
@@ -60,7 +61,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && SceneManager.GetActiveScene().name != "Prologue")
         {
             pressE.SetActive(false);
             nearNpc = false;

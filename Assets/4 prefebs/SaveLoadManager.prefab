@@ -43,6 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467c60dfb11b46b4eb305548699ec8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deco:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isLoad: 0
   data:
     posX: 0
     posY: 0
@@ -51,3 +56,20 @@ MonoBehaviour:
     rotY: 0
     rotZ: 0
     rotW: 0
+    coin: 0
+    stone: 0
+    hasItem: 
+    hasWeapons: 
+    talk1: []
+    talk2: []
+    talk3: []
+    talk4: []
+    talk5: []
+    talk6: []
+    nowQust: 0
+    isComplete: 0
+    isGameWin: 0
+    thirdQuest: 0
+    sixthQuest: 
+    nearDeco: 000000
+    itemIndex: 000000000000000000000000

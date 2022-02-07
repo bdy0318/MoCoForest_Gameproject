@@ -72,7 +72,7 @@ public class Car : MonoBehaviour
                 color.a += Time.deltaTime;
                 endPanel.color = color;
             }
-            else
+            else if(AudioManager.Instance.flag)
             {
                 StartCoroutine(EndRace());
             }
@@ -275,6 +275,7 @@ public class Car : MonoBehaviour
     {
         endText.text = (GameManager.Instance.quest.isGameWin) ? "Win!" : "Lose";
         endText.gameObject.SetActive(true);
+        AudioManager.Instance.FadeOutMusic();
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene("MocoForest");
     }

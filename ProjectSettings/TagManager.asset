@@ -10,10 +10,10 @@ TagManager:
   - ShopItem
   - NPC
   - Deco
-  - Weapon
   - Item
-  - Melee
+  - Weapon
   - Enemy
+  - Melee
   layers:
   - Default
   - TransparentFX

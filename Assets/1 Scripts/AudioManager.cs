@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource source;
     public bool flag;
     
-    private WaitForSeconds waitTime = new WaitForSeconds(0.007f);
+    private WaitForSecondsRealtime waitTime = new WaitForSecondsRealtime(0.007f);
 
     // 음악 재생
     public void Play(int track)
@@ -53,10 +53,10 @@ public class AudioManager : MonoBehaviour
     }
 
     // 페이드 인
-    public void FadeInMusic()
+    public void FadeInMusic(float volume)
     {
         StopAllCoroutines();
-        StartCoroutine(FadeIn());
+        StartCoroutine(FadeIn(volume));
     }
 
     IEnumerator FadeOut()
@@ -70,14 +70,14 @@ public class AudioManager : MonoBehaviour
         source.volume = 0;
     }
 
-    IEnumerator FadeIn()
+    IEnumerator FadeIn(float volume)
     {
         flag = true;
-        for (float i = source.volume; i < 0.3f; i+= 0.001f)
+        for (float i = source.volume; i < volume; i+= 0.001f)
         {
             source.volume = i;
             yield return waitTime;
         }
-        source.volume = 0.3f;
+        source.volume = volume;
     }
 }

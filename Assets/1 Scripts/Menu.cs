@@ -7,9 +7,14 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     public GameObject pausePanel;
+    public Button saveButton;
     public Button loadButton;
+    public Button continueButton;
+    public GameObject saveLoadPanel;
+    public Text saveLoadText;
     public Player player;
     public bool isEnd;
+    bool isSaveLoad;
     bool mDown;
     #region Singleton
     public static Menu instance;
@@ -35,10 +40,12 @@ public class Menu : MonoBehaviour
     void Update()
     {
         mDown = Input.GetButtonDown("Menu");
+        // 메뉴 열고 닫기
         if (mDown && SceneManager.GetActiveScene().name == "MocoForest" && !player.isTalking && !player.isInventory && !player.isShopping)
         {
             if(!pausePanel.activeSelf)
             {
+                continueButton.Select();
                 pausePanel.SetActive(true);
                 player.isMenu = true;
                 isEnd = false;
@@ -51,12 +58,15 @@ public class Menu : MonoBehaviour
                 player.isMenu = false;
             }
         }
-        if(SaveLoadManager.Instance.IsSave())
+        if (SaveLoadManager.Instance.IsSave() && !isSaveLoad)
         {
             loadButton.interactable = true;
         }
+        else
+            loadButton.interactable = false;
     }
 
+    // 계속하기
     public void Continue()
     {
         pausePanel.SetActive(false);
@@ -69,23 +79,54 @@ public class Menu : MonoBehaviour
         }   
     }
 
+    // 세이브
     public void Save()
     {
+        saveLoadText.text = "저장 성공!";
         SaveLoadManager.Instance.Save();
+        saveLoadPanel.SetActive(true);
+        saveButton.interactable = false;
+        loadButton.interactable = false;
+        isSaveLoad = true;
+        StopAllCoroutines();
+        StartCoroutine(WaitTime());
     }
 
+    // 로드
     public void Load()
     {
+        saveLoadText.text = "로드 성공!";
         SaveLoadManager.Instance.Load();
+        saveLoadPanel.SetActive(true);
+        saveButton.interactable = false;
+        loadButton.interactable = false;
+        isSaveLoad = true;
+        StopAllCoroutines();
+        StartCoroutine(WaitTime());
     }
 
+    // 타이틀로
     public void Title()
     {
-
+        Continue();
+        player.gameObject.SetActive(false);
+        AudioManager.Instance.FadeOutMusic();
+        SceneManager.LoadScene("ObjectDestroy");
     }
 
+    // 종료하기
     public void Quit()
     {
         Application.Quit();
+    }
+
+    // 세이브 로드 텀
+    IEnumerator WaitTime()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        saveLoadPanel.SetActive(false);
+        saveButton.interactable = true;
+        loadButton.interactable = true;
+        isSaveLoad = false;
     }
 }
