@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class StartScene : MonoBehaviour
 {
-    public string sceneName = "SampleScene";
+    public string sceneName = "MocoForest";
 
     public void ClickStart()
     {
-        Debug.Log("로딩");
+        Debug.Log("시작로딩");
         SceneManager.LoadScene(sceneName);
     }
 
