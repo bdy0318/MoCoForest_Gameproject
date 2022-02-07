@@ -10,7 +10,7 @@ public class HelpButton : MonoBehaviour
     public Player player;
     public Button closeButton;
 
-
+    // 조작방법 열기
     public void ShowBtnHelp()
     {
         btnHelp.SetActive(true);
@@ -19,6 +19,7 @@ public class HelpButton : MonoBehaviour
             player.isInventory = false;
     }
 
+    //조작방법 닫기
     public void ShowHelp()
     {
         btnHelp.SetActive(false);
