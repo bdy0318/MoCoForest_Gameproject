@@ -341,10 +341,7 @@ public class Player : MonoBehaviour
             switch (item.type)
             {
                 case Item.Type.Stone:
-                    smallrock += item.value;
-                    if (smallrock > maxsmallrock)
-                        smallrock = maxsmallrock;
-                    stone++;
+                    stone += item.value;
                     break;
             }
             other.gameObject.SetActive(false);
@@ -416,7 +413,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         Transform parent = rock.transform.parent.transform;
-        yield return new WaitUntil(() => Vector3.Distance(transform.position, parent.position) > 10);
+        yield return new WaitUntil(() => Vector3.Distance(transform.position, parent.position) > 8);
         GameObject child = parent.GetChild(0).gameObject;
         child.SetActive(true);
         child.layer = 3;

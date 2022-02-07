@@ -9,13 +9,11 @@ public class Rock : MonoBehaviour
 
     Rigidbody rigid;
     BoxCollider boxCollider;
-    Material mat;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        mat = GetComponent<MeshRenderer>().material;
     }
 
     void OnTriggerEnter(Collider other)

@@ -14,16 +14,19 @@ public class EnemyQuestManager : MonoBehaviour
         if (GameManager.Instance.quest.nowQuest == 6 && !GameManager.Instance.quest.sixthQuest[0])
         {
             enemyA.gameObject.SetActive(true);
+            enemyA.gameObject.layer = 3;
             enemyA.Invoke("ChaseStart", 2);
         }
         if (GameManager.Instance.quest.nowQuest == 6 && !GameManager.Instance.quest.sixthQuest[1])
         {
             enemyB.gameObject.SetActive(true);
+            enemyB.gameObject.layer = 3;
             enemyB.Invoke("ChaseStart", 2);
         }
         if (GameManager.Instance.quest.nowQuest == 6 && !GameManager.Instance.quest.sixthQuest[2])
         {
             enemyC.gameObject.SetActive(true);
+            enemyC.gameObject.layer = 3;
             enemyC.Invoke("ChaseStart", 2);
         }
     }
