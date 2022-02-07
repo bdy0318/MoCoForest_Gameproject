@@ -24,8 +24,6 @@ public class Player : MonoBehaviour
     public float speed;
     public int coin;
     public int stone; // 채집한 돌 개수
-    public int smallrock;
-    public int maxsmallrock;
 
     float hAxis;
     float vAxis;
@@ -98,13 +96,13 @@ public class Player : MonoBehaviour
     // 플레이어 이동
     void Move()
     {
-        if (!isTalking && !isInventory)
+        if (!isTalking && !isInventory && !isSwap)
             moveVec = new Vector3(hAxis, 0, vAxis).normalized;
         else
             moveVec = new Vector3(0, 0, 0).normalized; // 대화 중인 경우
         
         // 물체 충돌 시 이동 제한
-        if(!isCollision && !isTalking && !isInventory)
+        if(!isCollision && !isTalking && !isInventory && !isSwap)
             transform.position += moveVec * speed * Time.deltaTime;
 
         anim.SetBool("isWalk", moveVec != Vector3.zero);
@@ -145,7 +143,7 @@ public class Player : MonoBehaviour
     }
     void Swap()
     {
-        if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump)
+        if (sDown1 && (!hasWeapons[0] || equipWeaponIndex == 0) && !isJump )
             return;
         if (sDown2 && (!hasWeapons[1] || equipWeaponIndex == 1) && !isJump)
             return;
@@ -331,8 +329,7 @@ public class Player : MonoBehaviour
             switch (item.type)
             {
                 case Item.Type.Stone:
-                    smallrock += item.value;
-                    stone++;
+                    stone += item.value;
                     break;
             }
             Destroy(other.gameObject);
@@ -343,7 +340,7 @@ public class Player : MonoBehaviour
             anim.SetBool("isJump", false); // 점프 중지
         }
 
-        if (!GameManager.Instance.quest.isMapChanged && other.gameObject.tag == "Ground")
+        else if(!GameManager.Instance.quest.isMapChanged && other.gameObject.tag == "Ground")
         {
             anim.SetBool("isJump", false); // 점프 중지
         }
