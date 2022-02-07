@@ -42,9 +42,10 @@ public class GameManager : MonoBehaviour
 
     public Text playerCoinTxt;
 
-    public Vector3 playerPos; // 모코숲 내 플레이어 위치
-    public Vector3 playerInitialPos; // 초기 플레이어 위치
-    public Vector3 questIconPos;    // 퀘스트 아이콘 위치
+    public Vector3 playerPos;           // 모코숲 내 플레이어 위치
+    public Vector3 playerInitialPos;    // 초기 플레이어 위치
+    public Vector3 questIconPos;        // 퀘스트 아이콘 위치
+    public Vector3 questIconInitialPos; // 초기 퀘스트 아이콘 위치
 
     bool isEndNextTitle;
     void Start()
@@ -204,6 +205,7 @@ public class GameManager : MonoBehaviour
                 player.gameObject.SetActive(true);
                 player.isTalking = false;
                 isEndNextTitle = false;
+                quest.QuestIcon.transform.position = questIconInitialPos;
             }
         }
         //두더지 잡기 중

@@ -212,7 +212,6 @@ public class Quest : MonoBehaviour
             talkManager.talkData[6000] = npcTalk.completeTalk5;
             isComplete = true;
             QuestIcon.gameObject.SetActive(false);
-            //QuestIcon.transform.position = new Vector3(999, 0, 0);
         }
         else if (nowQuest == 6 && !isComplete)
         {
