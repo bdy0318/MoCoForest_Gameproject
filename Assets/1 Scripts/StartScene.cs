@@ -11,6 +11,7 @@ public class StartScene : MonoBehaviour
     {
         Debug.Log("시작로딩");
         SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene("Prologue");
     }
 
     public void ClickExit()

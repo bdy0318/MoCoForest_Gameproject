@@ -21,6 +21,7 @@ public class DestroyObjectList : MonoBehaviour
         player = GameManager.Instance.player;
         player.shop = playerList[0].GetComponent<Shop>();
         player.inventory = playerList[1].GetComponent<Inventory>();
+        player.helpButton = playerList[2].GetComponent<HelpButton>();
 
         // 퀘스트
         quest = GameManager.Instance.quest;
@@ -36,6 +37,8 @@ public class DestroyObjectList : MonoBehaviour
         // 게임 매니저
         if (GameManager.Instance.playerPos != new Vector3(0, 999, 0))
             player.transform.position = GameManager.Instance.playerPos;
+        if (GameManager.Instance.questIconPos != new Vector3(999, 0, 0))
+            quest.QuestIcon.transform.position = GameManager.Instance.questIconPos;
         GameManager.Instance.coinPanel = gameManagerList[0];
         GameManager.Instance.playerCoinTxt = gameManagerList[1].GetComponent<Text>();
         GameManager.Instance.hammer = gameManagerList[2];

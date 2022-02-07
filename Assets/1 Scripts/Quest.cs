@@ -102,13 +102,10 @@ public class Quest : MonoBehaviour
 
     public void SecondQuest()
     {
-        // 퀘스트 완료 하기 쉽게 임시로 얘도 돌 3개로 바꿨음. --> 원래대로
-        //if (nowQuest == 2 && player.stone >= 3 && !isComplete)
         if (nowQuest == 2 && !isComplete && player.selectItem)
         {
             talkManager.talkData[2000] = npcTalk.completeTalk1;
             player.hasItem[player.selectItem.GetComponent<Item>().value]--; // 선물한 아이템 인벤토리에서 제거
-            //player.stone -= 3;
             player.selectItem = null;
             isComplete = true;
             ChangeQuestList();
@@ -214,6 +211,7 @@ public class Quest : MonoBehaviour
             talkManager.talkData[6000] = npcTalk.completeTalk5;
             isComplete = true;
             QuestIcon.gameObject.SetActive(false);
+            //QuestIcon.transform.position = new Vector3(999, 0, 0);
         }
         else if (nowQuest == 6 && !isComplete)
         {
