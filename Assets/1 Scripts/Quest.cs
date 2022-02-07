@@ -37,6 +37,7 @@ public class Quest : MonoBehaviour
     public int thirdQuest; // 세번째 퀘스트 마을 꾸미기 진행도 표시
     public bool[] sixthQuest; // 여섯번째 퀘스트 진행도
     public GameObject Decoration; //세번째 퀘스트 시작할 때 꾸미기 기능 활성화
+    public GameObject Monster;    //6번째 퀘스트 시작할 때 몬스터 활성화
     public TextMesh QuestIcon; //물음표 아이콘
 
     // 퀘스트 목록 변경
@@ -216,10 +217,12 @@ public class Quest : MonoBehaviour
         else if (nowQuest == 6 && !isComplete)
         {
             talkManager.talkData[6000] = npcTalk.questTalk5;
+            
         }
         // 퀘스트 받기 전
         else if (nowQuest == 5 && isComplete)
         {
+            Monster.SetActive(true);    //몬스터 나타남
             talkManager.talkData[6000] = npcTalk.questTalk5;
             NextQuest();
         }

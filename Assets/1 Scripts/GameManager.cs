@@ -53,8 +53,8 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.Play(0);
         AudioManager.Instance.FadeInMusic(0.3f);
         //퀘스트 쉽게 넘어가기
-        player.coin = 50000;
-        player.stone = 50;
+        player.coin = 5000;
+        player.stone = 0;
     }
 
     private void Update()

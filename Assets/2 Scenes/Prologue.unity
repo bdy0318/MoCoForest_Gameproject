@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 6b58224e4423d6e4682d6791bbac8d7c, type: 2}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 8c0044b7f48b0a140a6cc72686ae219c, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: ac662e38d465e4344b5b72fd91a67214, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -14726,6 +14726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   curHealth: 10
+  num: 0
   target: {fileID: 0}
   isChase: 0
 --- !u!195 &507706178
@@ -21448,6 +21449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   curHealth: 10
+  num: 0
   target: {fileID: 0}
   isChase: 0
 --- !u!65 &746911883
@@ -41735,6 +41737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   curHealth: 10
+  num: 0
   target: {fileID: 0}
   isChase: 0
 --- !u!65 &1450884670
@@ -42459,7 +42462,7 @@ PrefabInstance:
     - target: {fileID: 1414224898614497645, guid: b4355fe2db3ad7d49baebc705d9a4ac3, type: 3}
       propertyPath: clips.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 1532c7e67c2d60c4c8780da14b7e8fcf, type: 3}
+      objectReference: {fileID: 8300000, guid: 26364aaf1f64b40c1a047b0bacfbd10e, type: 3}
     - target: {fileID: 1414224898614497645, guid: b4355fe2db3ad7d49baebc705d9a4ac3, type: 3}
       propertyPath: clips.Array.data[2]
       value: 

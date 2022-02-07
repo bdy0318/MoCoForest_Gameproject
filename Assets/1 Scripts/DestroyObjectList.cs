@@ -33,6 +33,7 @@ public class DestroyObjectList : MonoBehaviour
         quest.endingManager = questList[7].GetComponent<Ending>();
         quest.Decoration = questList[8];
         quest.QuestIcon = questList[9].GetComponent<TextMesh>();
+        quest.Monster = questList[10];
 
         // 게임 매니저
         if (GameManager.Instance.playerPos != new Vector3(0, 999, 0))

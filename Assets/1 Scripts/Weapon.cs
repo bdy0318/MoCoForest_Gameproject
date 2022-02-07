@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Weapon : MonoBehaviour
 {
     public enum Type { Melee, Range };
@@ -10,6 +11,7 @@ public class Weapon : MonoBehaviour
     public float rate;
     public BoxCollider meleeArea;
     public TrailRenderer trailEffect;
+
 
     public void Use()
     {
@@ -33,4 +35,6 @@ public class Weapon : MonoBehaviour
         trailEffect.enabled = false;
 
     }
+
+   
 }
