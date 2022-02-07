@@ -104,8 +104,8 @@ GameObject:
   - component: {fileID: 4970925955140138739}
   - component: {fileID: 4970925955138844371}
   - component: {fileID: 4970925955137713171}
-  - component: {fileID: 4829384826900021042}
   - component: {fileID: 2466456316404817718}
+  - component: {fileID: 6884778620227450842}
   m_Layer: 0
   m_Name: SmallRock 1
   m_TagString: Item
@@ -177,20 +177,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4829384826900021042
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4970925955139906259}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: e9089b1db16b58f4282a94e020b9c0e8, type: 3}
 --- !u!114 &2466456316404817718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,3 +192,17 @@ MonoBehaviour:
   type: 2
   value: 1
   itemName: 
+--- !u!64 &6884778620227450842
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4970925955139906259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: e9089b1db16b58f4282a94e020b9c0e8, type: 3}
