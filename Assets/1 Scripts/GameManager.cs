@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public Vector3 playerPos; // 모코숲 내 플레이어 위치
     public Vector3 playerInitialPos; // 초기 플레이어 위치
+    public Vector3 questIconPos;    // 퀘스트 아이콘 위치
 
     bool isEndNextTitle;
     void Start()
@@ -65,9 +66,10 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MocoForest")
         {
             playerPos = player.transform.position; // 플레이어 위치 저장
+            questIconPos = quest.QuestIcon.transform.position; // 퀘스트 아이콘 위치 저장
 
             // 두더지 잡기 후 설정
-            if(quest.nowQuest == 4 && !quest.isComplete && quest.isMapChanged)
+            if (quest.nowQuest == 4 && !quest.isComplete && quest.isMapChanged)
             {
                 AudioManager.Instance.Play(0);
                 quest.isMapChanged = false;

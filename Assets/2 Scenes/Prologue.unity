@@ -59912,6 +59912,120 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 1901044d9333fa04486b1fc98790fc12, type: 3}
+--- !u!1001 &1401004727507659034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.795
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.8829
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 18.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613340, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1401004727340613342, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+      propertyPath: m_Name
+      value: RockSIgn
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0a9567b6d472d074d9650e5ddd7d5d75, type: 3}
+--- !u!1001 &4935601326580475210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4935601326046500321, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_Name
+      value: EnemySign
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 22.242336
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935601326046500327, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1b9fd186a1090e14faa6f8a0e3b950a7, type: 3}
 --- !u!137 &7463471402531600353
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -61600,12 +61714,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'pinky_01_l'\n\tTransform 'Clavicle_r'\n\tTransform
-    'thumb_01_r'\n\tTransform 'thumb_03_r'\n\tTransform 'Kira'\n\tTransform 'thigh_r'\n\tTransform
-    'ring_03_r'\n\tTransform 'lowerarm_r'\n\tTransform 'ring_03_l'\n\tTransform 'pinky_01_r'\n\tand
-    more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0

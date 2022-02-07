@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
     public Shop shop;
     public Inventory inventory;
+    public HelpButton helpButton;
 
     Vector3 moveVec;
     GameObject nearObject;
@@ -189,14 +190,16 @@ public class Player : MonoBehaviour
         if(isTalking)
         {
             inventory.btnInventory.SetActive(false);
+            helpButton.btnHelp.SetActive(false);
         }
         // 인벤토리가 열리는 경우
         else if(!isTalking && !isInventory)
         {
             inventory.btnInventory.SetActive(true);
+            helpButton.btnHelp.SetActive(true);
         }
         // tab 키 사용시 인벤토리 열기
-        if(tDown && !isTalking && !isInventory)
+        if (tDown && !isTalking && !isInventory)
         {
             inventory.ShowInventory();
         }
@@ -210,6 +213,19 @@ public class Player : MonoBehaviour
         else if(sDown && isInventory && inventory.btnInventory.activeSelf)
         {
             isInventory = false;
+        }
+
+        // 도움말 버튼
+        // H키 사용시 인벤토리 열기
+        if(Input.GetKeyDown(KeyCode.H) && !isTalking && !isInventory)
+        {
+            helpButton.ShowHelp();
+        }
+        // H키로 도움말 닫기
+        else if(Input.GetKeyDown(KeyCode.H) && !isTalking && helpButton.pannelHelp.activeSelf)
+        {
+            isInventory = false;
+            helpButton.ShowBtnHelp();
         }
 
     }
