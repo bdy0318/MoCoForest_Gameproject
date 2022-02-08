@@ -24,7 +24,10 @@ public class FadeInOut : MonoBehaviour
     private void Awake()
     {
         image = GetComponent<Image>();
+    }
 
+    private void Start()
+    {
         OnFade(FadeState.FadeIn);
     }
 
