@@ -28,6 +28,7 @@ public class FadeInOut : MonoBehaviour
 
     private void Start()
     {
+        // 여기다 넣어야 null 오류가 나지 않는다!
         OnFade(FadeState.FadeIn);
     }
 

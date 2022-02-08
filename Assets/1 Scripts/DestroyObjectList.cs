@@ -38,7 +38,6 @@ public class DestroyObjectList : MonoBehaviour
         // 게임 매니저
         if (GameManager.Instance.playerPos != new Vector3(0, 999, 0))
             player.transform.position = GameManager.Instance.playerPos;
-        //if (GameManager.Instance.questIconPos != new Vector3(999, 0, 0))
         quest.QuestIcon.transform.position = GameManager.Instance.questIconPos;
         GameManager.Instance.coinPanel = gameManagerList[0];
         GameManager.Instance.playerCoinTxt = gameManagerList[1].GetComponent<Text>();

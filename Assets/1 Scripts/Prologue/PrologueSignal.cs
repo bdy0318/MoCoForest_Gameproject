@@ -11,7 +11,6 @@ public class PrologueSignal : MonoBehaviour
     void PrologueFinish()
     {
         isPrologueFinish = true;
-        AudioManager.Instance.FadeOutMusic();
         fade.OnFade(FadeState.FadeOut);
     }
 
