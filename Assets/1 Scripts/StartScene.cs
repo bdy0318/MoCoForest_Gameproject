@@ -10,7 +10,8 @@ public class StartScene : MonoBehaviour
     public void ClickStart()
     {
         Debug.Log("시작로딩");
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("Prologue");
     }
 
     public void ClickExit()

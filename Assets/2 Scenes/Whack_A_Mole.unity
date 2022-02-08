@@ -3692,7 +3692,7 @@ MonoBehaviour:
   countDown: {fileID: 551040699}
   moleSpawner: {fileID: 1221204412}
   tip: {fileID: 25980165}
-  <MaxTime>k__BackingField: 60
+  <MaxTime>k__BackingField: 3
 --- !u!82 &992608500
 AudioSource:
   m_ObjectHideFlags: 0

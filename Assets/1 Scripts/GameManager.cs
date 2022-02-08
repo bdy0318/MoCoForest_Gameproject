@@ -42,8 +42,10 @@ public class GameManager : MonoBehaviour
 
     public Text playerCoinTxt;
 
-    public Vector3 playerPos; // 모코숲 내 플레이어 위치
-    public Vector3 playerInitialPos; // 초기 플레이어 위치
+    public Vector3 playerPos;           // 모코숲 내 플레이어 위치
+    public Vector3 playerInitialPos;    // 초기 플레이어 위치
+    public Vector3 questIconPos;        // 퀘스트 아이콘 위치
+    public Vector3 questIconInitialPos; // 초기 퀘스트 아이콘 위치
 
     bool isEndNextTitle;
     void Start()
@@ -52,9 +54,8 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.Play(0);
         AudioManager.Instance.FadeInMusic(0.3f);
         //퀘스트 쉽게 넘어가기
-        player.coin = 50000;
-        player.stone = 50;
-        
+        player.coin = 5000;
+        player.stone = 0;
     }
 
     private void Update()
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "MocoForest")
         {
             playerPos = player.transform.position; // 플레이어 위치 저장
+            questIconPos = quest.QuestIcon.transform.position; // 퀘스트 아이콘 위치 저장
 
             // 게임 시작
             if(quest.nowQuest == 0 && quest.isMapChanged)
@@ -203,6 +205,7 @@ public class GameManager : MonoBehaviour
                 player.gameObject.SetActive(true);
                 player.isTalking = false;
                 isEndNextTitle = false;
+                quest.QuestIcon.transform.position = questIconInitialPos;
             }
         }
         //두더지 잡기 중

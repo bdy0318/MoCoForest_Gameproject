@@ -6534,7 +6534,9 @@ MonoBehaviour:
   showKey: {fileID: 1467626450}
   showKeyText: {fileID: 1363038092}
   itemIndex: 0
+  num: 0
   nearDecoZone: 0
+  isComplete: 0
   player: {fileID: 1475808748}
   inventory: {fileID: 61321949}
   quest: {fileID: 182372309}
@@ -25417,6 +25419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   curHealth: 10
+  num: 0
   target: {fileID: 548921867}
   isChase: 0
 --- !u!65 &768281255
@@ -36607,9 +36610,14 @@ MonoBehaviour:
   quest: {fileID: 182372309}
   talkManager: {fileID: 2091057623}
   coinPanel: {fileID: 832785754}
+  hammer: {fileID: 0}
+  handGun: {fileID: 0}
+  decoObj: []
+  decoList: 
   playerCoinTxt: {fileID: 1662908167}
   playerPos: {x: 0, y: 999, z: 0}
   playerInitialPos: {x: 0.94, y: 0.067, z: 5.12}
+  questIconPos: {x: 0, y: 0, z: 0}
 --- !u!4 &1220476864
 Transform:
   m_ObjectHideFlags: 0
@@ -41087,7 +41095,9 @@ MonoBehaviour:
   showKey: {fileID: 1467626450}
   showKeyText: {fileID: 1363038092}
   itemIndex: 0
+  num: 0
   nearDecoZone: 0
+  isComplete: 0
   player: {fileID: 1475808748}
   inventory: {fileID: 61321949}
   quest: {fileID: 182372309}
@@ -64806,7 +64816,9 @@ MonoBehaviour:
   showKey: {fileID: 1467626450}
   showKeyText: {fileID: 1363038092}
   itemIndex: 0
+  num: 0
   nearDecoZone: 0
+  isComplete: 0
   player: {fileID: 1475808748}
   inventory: {fileID: 61321949}
   quest: {fileID: 182372309}
