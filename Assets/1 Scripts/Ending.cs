@@ -9,6 +9,7 @@ public class Ending : MonoBehaviour
     public GameObject endingCam;
     public Image fadePanel;
     public Text titlePanel;
+    public GameObject endingcredit;
     public GameObject enter;
     public Transform[] playerPos;
     public Transform[] cameraPos;
@@ -89,16 +90,21 @@ public class Ending : MonoBehaviour
                     color.a += Time.deltaTime * 0.3f;
                     titlePanel.color = color;
                 }
+                
                 // 엔터 표시
-                else if (endingCam.transform.position.y > 20)
+                else if (endingCam.transform.position.y > 15)
                 {
-                    enter.SetActive(true);
-                    if (AudioManager.Instance.flag)
+                    endingcredit.SetActive(true);
+                    if (endingCam.transform.position.y > 25)
                     {
-                        AudioManager.Instance.FadeOutMusic();
+                        enter.SetActive(true);
+                        if (AudioManager.Instance.flag)
+                        {
+                            AudioManager.Instance.FadeOutMusic();
+                        }
                     }
                 }
-                else if (endingCam.transform.position.y > 30)
+                else if (endingCam.transform.position.y > 27)
                     isLerping = false;
                 // 엔터 표시 후 엔터 시
                 if(enter.activeSelf && Input.GetButtonDown("Submit"))
