@@ -10,6 +10,11 @@ public class HelpButton : MonoBehaviour
     public Player player;
     public Button closeButton;
 
+    public void Start()
+    {
+        player = GameManager.Instance.player;
+    }
+
     // 조작방법 열기
     public void ShowBtnHelp()
     {
