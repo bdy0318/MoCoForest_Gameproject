@@ -87,7 +87,7 @@ public class RankSystem : MonoBehaviour
         Color color = Color.white;
 
         //성공 - 5천점 이상 달성, 실패
-        if(PlayerPrefs.GetInt("CurrentScore") >= 0)
+        if(PlayerPrefs.GetInt("CurrentScore") >= 5000)
         {
             textResult.text = "성공";
             GameManager.Instance.quest.isGameWin = true;
