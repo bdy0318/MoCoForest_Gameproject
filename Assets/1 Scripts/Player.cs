@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Timeline;
-using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -58,9 +56,6 @@ public class Player : MonoBehaviour
     public Shop shop;
     public Inventory inventory;
     public HelpButton helpButton;
-
-    public PlayableDirector prologue;
-    public TimelineAsset time;
 
     Vector3 moveVec;
     GameObject nearObject;

@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Playables;
-using UnityEngine.Timeline;
 using UnityEngine.SceneManagement;
 
 
@@ -242,7 +240,7 @@ public class GameManager : MonoBehaviour
         {
             AudioManager.Instance.FadeOutMusic();
             playerPos = new Vector3(0, 999, 0);
-            player.coin = 0;
+            player.coin = 5000;
             player.stone = 0;
             player.selectItem = null;
             if(player.equipWeapon != null)
@@ -281,15 +279,6 @@ public class GameManager : MonoBehaviour
             isEndNextTitle = true;
             quest.isMapChanged = true;
             SceneManager.LoadScene("StartScene"); // 타이틀로 이동
-        }
-
-        // 프롤로그 시작
-        else if(SceneManager.GetActiveScene().name == "Prologue" && !player.gameObject.activeSelf)
-        {
-            player.gameObject.SetActive(true);
-            player.prologue = FindObjectOfType<PlayableDirector>();
-            TrackAsset temp = player.time.GetOutputTrack(6);
-            player.prologue.SetGenericBinding(temp, player.GetComponent<Animator>());
         }
     }
 
