@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!-- Project -->
+  <PropertyGroup>
+    <ProjectGuid>{F9395A1B-24AA-4AFE-B9A1-24418D9D7A18}</ProjectGuid>
+    <RootNamespace>Bolt</RootNamespace>
+    <AssemblyName>Bolt.Core.Editor</AssemblyName>
+    <DefineConstants>GUID_7314928a14330c04fb980214791646e9;TARGET_INCLUDE_EDITOR</DefineConstants>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <!-- Shared -->
+  <PropertyGroup>
+    <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
+    <PathMap>$(AppOutputBase)=Bolt.Core.Editor\</PathMap>
+    <Platform>AnyCPU</Platform>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <LangVersion>7.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <NoWarn>1591</NoWarn>
+    <Configuration Condition=" '$(Configuration)' == '' ">Bolt1.Net3.Debug</Configuration>
+    <Stability Condition=" '$(Configuration)' == 'Bolt1.Net3.Debug' Or '$(Configuration)' == 'Bolt1.Net4.Debug' ">Debug</Stability>
+    <Stability Condition=" '$(Configuration)' == 'Bolt1.Net3.Release' Or '$(Configuration)' == 'Bolt1.Net4.Release' ">Release</Stability>
+    <TargetFrameworkVersionNumber Condition=" '$(Configuration)' == 'Bolt1.Net3.Debug' Or '$(Configuration)' == 'Bolt1.Net3.Release' ">3.5</TargetFrameworkVersionNumber>
+    <TargetFrameworkVersionNumber Condition=" '$(Configuration)' == 'Bolt1.Net4.Debug' Or '$(Configuration)' == 'Bolt1.Net4.Release'">4.6</TargetFrameworkVersionNumber>
+    <OutputPath>$(BaseOutputPath)\$(Configuration)</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <!-- Debug -->
+  <PropertyGroup Condition=" '$(Stability)' == 'Debug' ">
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE;ENABLE_PROFILER</DefineConstants>
+  </PropertyGroup>
+  <!-- Release -->
+  <PropertyGroup Condition=" '$(Stability)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <!-- .NET 3.5 -->
+  <PropertyGroup Condition=" '$(TargetFrameworkVersionNumber)' == 3.5 ">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <DefineConstants>$(DefineConstants);NET_2_0</DefineConstants>
+  </PropertyGroup>
+  <!-- .NET 4.6 -->
+  <PropertyGroup Condition=" '$(TargetFrameworkVersionNumber)' == 4.6 ">
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <DefineConstants>$(DefineConstants);NET_4_6</DefineConstants>
+  </PropertyGroup>
+  <!-- References -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <ProjectReference Include="..\..\Ludiq.Core\Editor\Ludiq.Core.Editor.csproj">
+      <Project>{dc73d5b1-75d0-4f0b-af83-e92185f73ab0}</Project>
+      <Name>Ludiq.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ludiq.Core\Runtime\Ludiq.Core.Runtime.csproj">
+      <Project>{8bda7b48-d6ea-4762-822f-eca6ea7d4345}</Project>
+      <Name>Ludiq.Core.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ludiq.Graphs\Editor\Ludiq.Graphs.Editor.csproj">
+      <Project>{56432c98-9376-4015-98d6-d610e44028d7}</Project>
+      <Name>Ludiq.Graphs.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ludiq.Graphs\Runtime\Ludiq.Graphs.Runtime.csproj">
+      <Project>{aabbe8dc-1b61-4d5b-bf81-7b66aa2566ff}</Project>
+      <Name>Ludiq.Graphs.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Runtime\Bolt.Core.Runtime.csproj">
+      <Project>{0fe89c0a-b748-486b-aedc-1aadb2d1fc31}</Project>
+      <Name>Bolt.Core.Runtime</Name>
+    </ProjectReference>
+    <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Unity\2018.4\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Unity\2018.4\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <!-- Sources -->
+  <ItemGroup>
+    <Compile Include="BoltStyles.cs" />
+    <Compile Include="BoltGUI.cs" />
+    <Compile Include="BoltProduct.cs" />
+    <Compile Include="Inspection\EventMachineEditor.cs" />
+    <Compile Include="Plugin\BoltCore.cs" />
+    <Compile Include="Plugin\BoltCoreConfiguration.cs" />
+    <Compile Include="Plugin\BoltCoreManifest.cs" />
+    <Compile Include="Plugin\BoltCorePaths.cs" />
+    <Compile Include="Plugin\BoltCoreResources.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_0_0.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_3_0.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_0.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_1.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_14.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_15.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_2.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_5.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_13.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Variables\EditorVariablesUtility.cs" />
+    <Compile Include="Variables\InspectorVariableFieldAttributeInspector.cs" />
+    <Compile Include="Variables\VariableDeclarationInspector.cs" />
+    <Compile Include="Variables\VariableDeclarationsInspector.cs" />
+    <Compile Include="Variables\VariableNameInspector.cs" />
+    <Compile Include="Variables\VariablesAssetEditor.cs" />
+    <Compile Include="Variables\VariablesEditor.cs" />
+    <Compile Include="Variables\VariablesPanel.cs" />
+    <Compile Include="Variables\VariablesWindow.cs" />
+    <Compile Include="Analytics\Analytics.cs" />
+  </ItemGroup>
+  <!-- Resources -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Logos\LogoBolt%40Pro.png" />
+    <EmbeddedResource Include="Resources\Logos\LogoBolt.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\ApplicationVariable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\ApplicationVariable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\FlowVariable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\FlowVariable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\GraphVariable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\GraphVariable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\ObjectVariable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\ObjectVariable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\SavedVariable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\SavedVariable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\SceneVariable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\SceneVariable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\Variable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Variables\Variable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\VariablesWindow%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\VariablesWindow%4016x_Pro.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\VariablesWindow%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\VariablesWindow%4032x_Pro.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MessageListener%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MessageListener%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Variables%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Variables%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.VariablesAsset%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.VariablesAsset%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.SceneVariables%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.SceneVariables%4032x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Analytics\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Events -->
+  <PropertyGroup>
+  <!-- Kind of a hack to get builds working on Linux. Really we should be checking for bash -->
+    <PostBuildEvent Condition="$(OS) != 'Unix'">
+      echo $(DefineConstants) &gt; "$(TargetDir)\$(TargetName).defines"
+      
+      robocopy "$(TargetDir)." "$(SolutionDir)Assemblies\$(ConfigurationName)" *.dll *.dll.mdb *.pdb *.xml *.defines /xf Unity*.*
+      
+      if errorlevel 1 exit 0 else exit %25errorlevel%25
+    </PostBuildEvent>
+    <PostBuildEvent Condition="$(OS) == 'Unix'">
+      echo "$(DefineConstants)" &gt; "$(TargetDir)\$(TargetName).defines"
+
+      mkdir -p "$(SolutionDir)Assemblies/$(ConfigurationName)/"
+
+      rsync -rq "$(TargetDir)." "$(SolutionDir)Assemblies/$(ConfigurationName)/" --exclude 'Unity*.*' --include '*.dll' --include '*.dll.mdb' --include '*.pdb' --include '*.xml' --include '*.defines' 
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

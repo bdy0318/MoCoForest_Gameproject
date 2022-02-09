@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!-- Project -->
+  <PropertyGroup>
+    <ProjectGuid>{310B740F-2F92-4DC0-9112-A27B8CC1E2F9}</ProjectGuid>
+    <RootNamespace>Bolt</RootNamespace>
+    <AssemblyName>Bolt.Flow.Editor</AssemblyName>
+    <DefineConstants>GUID_6cb65bfc2ee1c854ca1382175f3aba91;TARGET_INCLUDE_EDITOR</DefineConstants>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <!-- Shared -->
+  <PropertyGroup>
+    <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
+    <PathMap>$(AppOutputBase)=Bolt.Flow.Editor\</PathMap>
+    <Platform>AnyCPU</Platform>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <LangVersion>7.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <NoWarn>1591</NoWarn>
+    <Configuration Condition=" '$(Configuration)' == '' ">Bolt1.Net3.Debug</Configuration>
+    <Stability Condition=" '$(Configuration)' == 'Bolt1.Net3.Debug' Or '$(Configuration)' == 'Bolt1.Net4.Debug' ">Debug</Stability>
+    <Stability Condition=" '$(Configuration)' == 'Bolt1.Net3.Release' Or '$(Configuration)' == 'Bolt1.Net4.Release' ">Release</Stability>
+    <TargetFrameworkVersionNumber Condition=" '$(Configuration)' == 'Bolt1.Net3.Debug' Or '$(Configuration)' == 'Bolt1.Net3.Release' ">3.5</TargetFrameworkVersionNumber>
+    <TargetFrameworkVersionNumber Condition=" '$(Configuration)' == 'Bolt1.Net4.Debug' Or '$(Configuration)' == 'Bolt1.Net4.Release'">4.6</TargetFrameworkVersionNumber>
+    <OutputPath>$(BaseOutputPath)\$(Configuration)</OutputPath>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <!-- Debug -->
+  <PropertyGroup Condition=" '$(Stability)' == 'Debug' ">
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE;ENABLE_PROFILER</DefineConstants>
+  </PropertyGroup>
+  <!-- Release -->
+  <PropertyGroup Condition=" '$(Stability)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <!-- .NET 3.5 -->
+  <PropertyGroup Condition=" '$(TargetFrameworkVersionNumber)' == 3.5 ">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <DefineConstants>$(DefineConstants);NET_2_0</DefineConstants>
+  </PropertyGroup>
+  <!-- .NET 4.6 -->
+  <PropertyGroup Condition=" '$(TargetFrameworkVersionNumber)' == 4.6 ">
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <DefineConstants>$(DefineConstants);NET_4_6</DefineConstants>
+  </PropertyGroup>
+  <!-- References -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Threading, Version=1.0.2856.102, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" Condition="$(TargetFrameworkVersionNumber) == 3.5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TaskParallelLibrary\System.Threading.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\..\Bolt.Core\Editor\Bolt.Core.Editor.csproj">
+      <Project>{f9395a1b-24aa-4afe-b9a1-24418d9d7a18}</Project>
+      <Name>Bolt.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Bolt.Core\Runtime\Bolt.Core.Runtime.csproj">
+      <Project>{0fe89c0a-b748-486b-aedc-1aadb2d1fc31}</Project>
+      <Name>Bolt.Core.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ludiq.Core\Editor\Ludiq.Core.Editor.csproj">
+      <Project>{dc73d5b1-75d0-4f0b-af83-e92185f73ab0}</Project>
+      <Name>Ludiq.Core.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ludiq.Core\Runtime\Ludiq.Core.Runtime.csproj">
+      <Project>{8bda7b48-d6ea-4762-822f-eca6ea7d4345}</Project>
+      <Name>Ludiq.Core.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ludiq.Graphs\Editor\Ludiq.Graphs.Editor.csproj">
+      <Project>{56432c98-9376-4015-98d6-d610e44028d7}</Project>
+      <Name>Ludiq.Graphs.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ludiq.Graphs\Runtime\Ludiq.Graphs.Runtime.csproj">
+      <Project>{aabbe8dc-1b61-4d5b-bf81-7b66aa2566ff}</Project>
+      <Name>Ludiq.Graphs.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Runtime\Bolt.Flow.Runtime.csproj">
+      <Project>{43e23583-9cd3-41ec-9848-86ded656c496}</Project>
+      <Name>Bolt.Flow.Runtime</Name>
+    </ProjectReference>
+    <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Unity\2018.4\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Unity\2018.4\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <!-- Sources -->
+  <ItemGroup>
+    <Compile Include="Acknowledgements\Acknowledgement_NCalc.cs" />
+    <Compile Include="Connections\InvalidConnectionWidget.cs" />
+    <Compile Include="Connections\IUnitConnectionWidget.cs" />
+    <Compile Include="Connections\UnitConnectionStyles.cs" />
+    <Compile Include="Connections\UnitConnectionWidget.cs" />
+    <Compile Include="Connections\ControlConnectionWidget.cs" />
+    <Compile Include="Connections\ValueConnectionWidget.cs" />
+    <Compile Include="Description\FlowGraphDescriptor.cs" />
+    <Compile Include="Description\FlowMachineDescriptor.cs" />
+    <Compile Include="Description\FlowMacroDescriptor.cs" />
+    <Compile Include="Description\UnitAnalyser.cs" />
+    <Compile Include="Description\UnitAnalysis.cs" />
+    <Compile Include="Description\UnitDescription.cs" />
+    <Compile Include="Description\UnitPortDescription.cs" />
+    <Compile Include="Description\UnitPortDescriptor.cs" />
+    <Compile Include="Events\CustomEventDescriptor.cs" />
+    <Compile Include="Events\EventUnitDescriptor.cs" />
+    <Compile Include="Events\MessageListenerEditor.cs" />
+    <Compile Include="Events\GlobalMessageListenerEditor.cs" />
+    <Compile Include="Events\TriggerCustomEventDescriptor.cs" />
+    <Compile Include="FlowEditorBindings.cs" />
+    <Compile Include="Framework\Codebase\CreateStructDescriptor.cs" />
+    <Compile Include="Framework\Codebase\CreateStructOption.cs" />
+    <Compile Include="Framework\Codebase\MemberUnitAnalyser.cs" />
+    <Compile Include="Framework\Control\ForEachDescriptor.cs" />
+    <Compile Include="Framework\Control\SelectOnFlowDescriptor.cs" />
+    <Compile Include="Framework\Nesting\GraphInputAnalyser.cs" />
+    <Compile Include="Framework\Nesting\NesterUnitAnalyser.cs" />
+    <Compile Include="Framework\Nesting\GraphOutputAnalyser.cs" />
+    <Compile Include="Framework\Nesting\UnitPortDefinitionUtility.cs" />
+    <Compile Include="Framework\Time\WaitForFlowDescriptor.cs" />
+    <Compile Include="Framework\Variables\GetVariableOption.cs" />
+    <Compile Include="Framework\Variables\IsVariableDefinedOption.cs" />
+    <Compile Include="Framework\Variables\SetVariableOption.cs" />
+    <Compile Include="Framework\Variables\UnifiedVariableUnitDescriptor.cs" />
+    <Compile Include="Framework\Variables\UnifiedVariableUnitOption.cs" />
+    <Compile Include="Framework\Variables\UnifiedVariableUnitWidget.cs" />
+    <Compile Include="Framework\Variables\Obsolete\VariableUnitWidget.cs" />
+    <Compile Include="Framework\Variables\VariableKindOption.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_0_4.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_1_0..cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_1_1.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_1_2.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_1_3.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_2_0.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_2_2.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_2_3.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_2_4.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_3_0.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_0.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_1.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_2.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_3.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_4.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_6.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_10.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_8.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_7.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_4_5.cs" />
+    <Compile Include="Plugin\Migrations\Migration_1_1_2_to_1_1_3.cs" />
+    <Compile Include="Plugin\Migrations\Migration_1_1_1_to_1_1_2.cs" />
+    <Compile Include="Plugin\Migrations\Migration_1_1_3_to_1_2_0.cs" />
+    <Compile Include="Plugin\Migrations\Migration_1_2_0_to_1_2_2.cs" />
+    <Compile Include="Plugin\Migrations\Migration_1_2_4_to_1_3_0.cs" />
+    <Compile Include="Plugin\Migrations\Migration_1_3_0_to_1_4_0.cs" />
+    <Compile Include="Ports\InvalidInputWidget.cs" />
+    <Compile Include="Ports\InvalidOutputWidget.cs" />
+    <Compile Include="Units\IUnitWidget.cs" />
+    <Compile Include="XFlowGraph.cs" />
+    <Compile Include="FlowGraphContext.cs" />
+    <Compile Include="Framework\Codebase\ExposeOption.cs" />
+    <Compile Include="Framework\Codebase\GetMemberOption.cs" />
+    <Compile Include="Framework\Codebase\InvokeMemberOption.cs" />
+    <Compile Include="Framework\Codebase\MemberUnitOption.cs" />
+    <Compile Include="Framework\Codebase\SetMemberOption.cs" />
+    <Compile Include="Framework\Control\SequenceDescriptor.cs" />
+    <Compile Include="Framework\Codebase\LiteralOption.cs" />
+    <Compile Include="Framework\Codebase\LiteralWidget.cs" />
+    <Compile Include="Framework\Nesting\GraphInputInspector.cs" />
+    <Compile Include="Framework\Nesting\NesterUnitEditor.cs" />
+    <Compile Include="Framework\Nesting\NesterUnitOption.cs" />
+    <Compile Include="Framework\Nesting\NestrerUnitWidget.cs" />
+    <Compile Include="Framework\Nesting\GraphOutputInspector.cs" />
+    <Compile Include="Framework\Nesting\NesterUnitDescriptor.cs" />
+    <Compile Include="Framework\Nesting\GraphOutputWidget.cs" />
+    <Compile Include="Framework\Nesting\SuperUnitDescriptor.cs" />
+    <Compile Include="Framework\Nesting\SuperUnitEditor.cs" />
+    <Compile Include="Framework\Variables\Obsolete\GetVariableUnitOption.cs" />
+    <Compile Include="Framework\Variables\Obsolete\IsVariableDefinedUnitOption.cs" />
+    <Compile Include="Framework\Variables\Obsolete\SetVariableUnitOption.cs" />
+    <Compile Include="Framework\Variables\Obsolete\VariableUnitDescriptor.cs" />
+    <Compile Include="Framework\Variables\Obsolete\VariableUnitOption.cs" />
+    <Compile Include="Invocations\InvocationInspector.cs" />
+    <Compile Include="Invocations\MemberInvocationInspector.cs" />
+    <Compile Include="BoltFlowNameUtility.cs" />
+    <Compile Include="Options\IUnitOption.cs" />
+    <Compile Include="Options\UnitBase.cs" />
+    <Compile Include="Options\UnitOption.cs" />
+    <Compile Include="Options\UnitOptionFilter.cs" />
+    <Compile Include="Options\UnitOptionProvider.cs" />
+    <Compile Include="Options\UnitOptionTree.cs" />
+    <Compile Include="FlowCanvas.cs" />
+    <Compile Include="Framework\Nesting\SuperUnitWidget.cs" />
+    <Compile Include="Options\UnitCategoryOption.cs" />
+    <Compile Include="Options\UnitOptionRow.cs" />
+    <Compile Include="Plugin\BoltFlowPaths.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_0_0.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_0_1.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_0_2.cs" />
+    <Compile Include="Plugin\Changelogs\Changelog_1_0_3.cs" />
+    <Compile Include="Plugin\Migrations\Migration_1_0_2_to_1_0_3.cs" />
+    <Compile Include="Ports\IUnitPortWidget.cs" />
+    <Compile Include="Ports\UnitPortDefinitionInspector.cs" />
+    <Compile Include="Framework\Codebase\LiteralInspector.cs" />
+    <Compile Include="Ports\ValueInputDefinitionInspector.cs" />
+    <Compile Include="Ports\ValuePortDefinitionInspector.cs" />
+    <Compile Include="Units\UnitEditor.cs" />
+    <Compile Include="Units\UnitWidget.cs" />
+    <Compile Include="FlowGraphEditor.cs" />
+    <Compile Include="Events\EventUnitWidget.cs" />
+    <Compile Include="Framework\Nesting\GraphInputWidget.cs" />
+    <Compile Include="Plugin\BoltFlowManifest.cs" />
+    <Compile Include="Plugin\BoltFlow.cs" />
+    <Compile Include="Plugin\BoltFlowConfiguration.cs" />
+    <Compile Include="Plugin\BoltFlowResources.cs" />
+    <Compile Include="Ports\ControlInputWidget.cs" />
+    <Compile Include="Ports\ControlOutputWidget.cs" />
+    <Compile Include="Ports\UnitInputPortWidget.cs" />
+    <Compile Include="Ports\UnitOutputPortWidget.cs" />
+    <Compile Include="Ports\UnitPortWidget.cs" />
+    <Compile Include="Ports\ValueInputWidget.cs" />
+    <Compile Include="Ports\ValueOutputWidget.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Description\IUnitDescriptor.cs" />
+    <Compile Include="Description\UnitDescriptor.cs" />
+    <Compile Include="Framework\Codebase\ExposeDescriptor.cs" />
+    <Compile Include="Framework\Codebase\GetMemberDescriptor.cs" />
+    <Compile Include="Framework\Nesting\GraphInputDescriptor.cs" />
+    <Compile Include="Framework\Codebase\InvokeMemberDescriptor.cs" />
+    <Compile Include="Framework\Codebase\LiteralDescriptor.cs" />
+    <Compile Include="Framework\Codebase\MemberUnitDescriptor.cs" />
+    <Compile Include="Framework\MultiInputUnitAlphabeticDescriptor.cs" />
+    <Compile Include="Framework\MultiInputUnitNumericDescriptor.cs" />
+    <Compile Include="Framework\Nesting\GraphOutputDescriptor.cs" />
+    <Compile Include="Framework\Control\SelectOnEnumDescriptor.cs" />
+    <Compile Include="Framework\Control\SelectOnIntegerDescriptor.cs" />
+    <Compile Include="Framework\Control\SelectOnStringDescriptor.cs" />
+    <Compile Include="Framework\Control\SelectUnitDescriptor.cs" />
+    <Compile Include="Framework\Codebase\SetMemberDescriptor.cs" />
+    <Compile Include="Framework\Control\SwitchOnEnumDescriptor.cs" />
+    <Compile Include="Framework\Control\SwitchOnIntegerDescriptor.cs" />
+    <Compile Include="Framework\Control\SwitchOnStringDescriptor.cs" />
+    <Compile Include="Framework\Control\SwitchUnitDescriptor.cs" />
+    <Compile Include="Units\UnitInspector.cs" />
+    <Compile Include="Windows\AssemblyOptionsPage.cs" />
+    <Compile Include="Windows\UnitOptionsWizard.cs" />
+    <Compile Include="Windows\TypeOptionsPage.cs" />
+    <Compile Include="Analytics\FlowMacroSavedEvent.cs" />
+  </ItemGroup>
+  <!-- Resources -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\FlowMacro%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\FlowMacro%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Namespaces\Bolt%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Namespaces\Bolt%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Absolute%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Absolute%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Add%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Add%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.AddDictionaryItem%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.AddDictionaryItem%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.AddListItem%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.AddListItem%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.And%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.And%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Angle%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Angle%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ApproximatelyEqual%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ApproximatelyEqual%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Average%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Average%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Break%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Break%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Cache%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Cache%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Comparison%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Comparison%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.CountItems%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.CountItems%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.CustomEvent%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.CustomEvent%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Distance%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Distance%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Divide%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Divide%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.DotProduct%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.DotProduct%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Equal%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Equal%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.EqualityComparison%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.EqualityComparison%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.EventHandler%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.EventHandler%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.EventHelper%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.EventHelper%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ExclusiveOr%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ExclusiveOr%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Expose%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Expose%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FirstItem%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FirstItem%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FixedUpdate%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FixedUpdate%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Flow%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Flow%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FlowGraph%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FlowGraph%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FlowMachine%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FlowMachine%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FlowMacro%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.FlowMacro%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Formula%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Formula%4016x_Pro.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Formula%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Formula%4032x_Pro.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.GraphInput%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.GraphInput%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.GraphOutput%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.GraphOutput%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Greater%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Greater%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.GreaterOrEqual%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.GreaterOrEqual%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IApplicationVariableUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IApplicationVariableUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IBranchUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IBranchUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ICoroutineContext%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ICoroutineContext%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IEventUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IEventUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IExternalVariableUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IExternalVariableUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IGraphVariableUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IGraphVariableUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ILoopContext%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ILoopContext%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IObjectVariableUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IObjectVariableUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ISavedVariableUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ISavedVariableUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ISceneVariableUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ISceneVariableUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ISelectUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ISelectUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.IUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LastItem%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LastItem%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LateUpdate%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LateUpdate%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Lerp%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Lerp%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Less%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Less%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LessOrEqual%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LessOrEqual%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Literal%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Literal%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LoopUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.LoopUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Maximum%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Maximum%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Member%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Member%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MemberInvocationResult%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MemberInvocationResult%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MemberInvocationStatement%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MemberInvocationStatement%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MergeDictionaries%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MergeDictionaries%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MergeLists%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MergeLists%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Minimum%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Minimum%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Modulo%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Modulo%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MoveTowards%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.MoveTowards%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Multiply%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Multiply%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Negate%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Negate%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Normalize%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Normalize%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.NotApproximatelyEqual%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.NotApproximatelyEqual%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.NotEqual%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.NotEqual%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Null%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Null%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.NumericComparison%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.NumericComparison%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationFocus%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationFocus%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationLostFocus%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationLostFocus%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationPause%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationPause%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationQuit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationQuit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationResume%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnApplicationResume%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnBecameInvisible%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnBecameInvisible%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnBecameVisible%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnBecameVisible%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnButtonInput%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnButtonInput%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionEnter%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionEnter%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionEnter2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionEnter2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionExit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionExit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionExit2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionExit2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionStay%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionStay%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionStay2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCollisionStay2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDeselect%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDeselect%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDestinationReached%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDestinationReached%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDestroy%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDestroy%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDisable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDisable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDrawGizmos%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDrawGizmos%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDrawGizmosSelected%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDrawGizmosSelected%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnEnable%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnEnable%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnJointBreak%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnJointBreak%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnJointBreak2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnJointBreak2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnKeyboardInput%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnKeyboardInput%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseDown%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseDown%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseDrag%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseDrag%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseEnter%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseEnter%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseExit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseExit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseInput%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseInput%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseOver%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseOver%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseUp%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseUp%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseUpAsButton%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMouseUpAsButton%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnParticleCollision%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnParticleCollision%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerClick%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerClick%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerDown%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerDown%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerEnter%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerEnter%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerExit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerExit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerUp%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnPointerUp%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnSelect%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnSelect%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTimerElapsed%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTimerElapsed%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTransformChildrenChanged%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTransformChildrenChanged%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTransformParentChanged%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTransformParentChanged%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerEnter%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerEnter%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerEnter2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerEnter2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerExit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerExit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerExit2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerExit2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerStay%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerStay%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerStay2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnTriggerStay2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Or%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Or%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.PerSecond%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.PerSecond%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Project%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Project%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.RemoveDictionaryItem%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.RemoveDictionaryItem%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.RemoveListItem%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.RemoveListItem%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Round%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Round%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.VariablesSaver%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.VariablesSaver%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ScalarExponentiate%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ScalarExponentiate%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ScalarRoot%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ScalarRoot%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Self%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Self%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Sequence%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Sequence%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Start%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Start%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.StartCoroutine%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.StartCoroutine%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.SubGraph%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.SubGraph%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Subtract%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Subtract%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Sum%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Sum%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Update%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Update%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.UpdateRunner%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.UpdateRunner%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.WaitUnit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.WaitUnit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Codebase%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Codebase%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Collections%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Collections%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Collections\Dictionaries%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Collections\Dictionaries%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Collections\Lists%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Collections\Lists%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Control%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Control%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Coroutines%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Coroutines%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Animation%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Application%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Application%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Editor%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Editor%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\GUI%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\GUI%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Hierarchy%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Hierarchy%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Input%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Input%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Lifecycle%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Lifecycle%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Navigation%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Navigation%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Physics 2D%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Physics 2D%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Physics%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Physics%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Rendering%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Rendering%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\System%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\System%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Time%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Events\Time%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Logic%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Logic%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Loops%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Loops%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Macros%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Macros%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Generic%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Generic%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Scalar%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Scalar%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Vector 2%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Vector 2%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Vector 3%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Vector 3%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Vector 4%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Math\Vector 4%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Nesting%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Nesting%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Nulls%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Nulls%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Values%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Values%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Variables%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Variables%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Time%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Unit Categories\Time%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\UnitCategory%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\UnitCategory%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\UnitOptionsWizard\AssemblyOptionsPage%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\UnitOptionsWizard\AssemblyOptionsPage%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\UnitOptionsWizard\TypeOptionsPage%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Windows\UnitOptionsWizard\TypeOptionsPage%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Timer%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Timer%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Once%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Once%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.TryCatch%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.TryCatch%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Throw%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.Throw%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ToggleFlow%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ToggleFlow%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ToggleValue%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.ToggleValue%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCancel%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnCancel%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnSubmit%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnSubmit%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDrag%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnDrag%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnScroll%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnScroll%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMove%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.OnMove%4016x.png" />
+    <EmbeddedResource Include="Resources\Ports\ControlPortConnected%409x.png" />
+    <EmbeddedResource Include="Resources\Ports\ControlPortConnected%4018x.png" />
+    <EmbeddedResource Include="Resources\Ports\ControlPortUnconnected%409x.png" />
+    <EmbeddedResource Include="Resources\Ports\ControlPortUnconnected%4018x.png" />
+    <EmbeddedResource Include="Resources\Ports\InvalidPortConnected%409x.png" />
+    <EmbeddedResource Include="Resources\Ports\InvalidPortConnected%4018x.png" />
+    <EmbeddedResource Include="Resources\Ports\InvalidPortUnconnected%409x.png" />
+    <EmbeddedResource Include="Resources\Ports\InvalidPortUnconnected%4018x.png" />
+    <EmbeddedResource Include="Resources\Ports\ValuePortConnected%409x.png" />
+    <EmbeddedResource Include="Resources\Ports\ValuePortConnected%4018x.png" />
+    <EmbeddedResource Include="Resources\Ports\ValuePortUnconnected%409x.png" />
+    <EmbeddedResource Include="Resources\Ports\ValuePortUnconnected%4018x.png" />
+    <EmbeddedResource Include="Resources\Icons\Coroutine%4016x.png" />
+    <EmbeddedResource Include="Resources\Icons\Coroutine%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.SaveVariables%4032x.png" />
+    <EmbeddedResource Include="Resources\Icons\Types\Bolt.SaveVariables%4016x.png" />
+    <Content Include="Resources\License_MIT.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Analytics\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Events -->
+  <PropertyGroup>
+  <!-- Kind of a hack to get builds working on Linux. Really we should be checking for bash -->
+    <PostBuildEvent Condition="$(OS) != 'Unix'">
+      echo $(DefineConstants) &gt; "$(TargetDir)\$(TargetName).defines"
+
+      robocopy "$(TargetDir)." "$(SolutionDir)Assemblies\$(ConfigurationName)" *.dll *.dll.mdb *.pdb *.xml *.defines /xf Unity*.*
+
+      if errorlevel 1 exit 0 else exit %25errorlevel%25
+    </PostBuildEvent>
+    <PostBuildEvent Condition="$(OS) == 'Unix'">
+      echo "$(DefineConstants)" &gt; "$(TargetDir)\$(TargetName).defines"
+
+      mkdir -p "$(SolutionDir)Assemblies/$(ConfigurationName)/"
+
+      rsync -rq "$(TargetDir)." "$(SolutionDir)Assemblies/$(ConfigurationName)/" --exclude 'Unity*.*' --include '*.dll' --include '*.dll.mdb' --include '*.pdb' --include '*.xml' --include '*.defines' 
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
