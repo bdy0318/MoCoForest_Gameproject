@@ -963,6 +963,7 @@ MonoBehaviour:
   textPrefab: {fileID: 2101171236598208382, guid: 5b50eae80da979944b72ef910e5e4499, type: 3}
   panelRankInfo: {fileID: 199031906}
   textResult: {fileID: 280662873}
+  gameController: {fileID: 0}
   quest: {fileID: 4093814598585696112, guid: 4b10cb2d452ab5e42a881b5db22a97e2, type: 3}
 --- !u!4 &769501763
 Transform:
@@ -1418,7 +1419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBAA9\uD45C\uC810\uC218\uB294 5000\uC810!"
+  m_text: "\uBAA9\uD45C\uC810\uC218\uB294 4000\uC810!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 777cefd809699bd4e972f577df4fd0cf, type: 2}
   m_sharedMaterial: {fileID: -4027853524254351344, guid: 777cefd809699bd4e972f577df4fd0cf, type: 2}
