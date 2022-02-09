@@ -7,6 +7,8 @@ public class EnemyQuestManager : MonoBehaviour
     public Enemy enemyA;
     public Enemy enemyB;
     public Enemy enemyC;
+    public Enemy enemyD;
+    public Enemy enemyE;
 
     void Update()
     {
@@ -28,6 +30,18 @@ public class EnemyQuestManager : MonoBehaviour
             enemyC.gameObject.SetActive(true);
             enemyC.gameObject.layer = 3;
             enemyC.Invoke("ChaseStart", 2);
+        }
+        if (GameManager.Instance.quest.nowQuest == 6 && !GameManager.Instance.quest.sixthQuest[3])
+        {
+            enemyD.gameObject.SetActive(true);
+            enemyD.gameObject.layer = 3;
+            enemyD.Invoke("ChaseStart", 2);
+        }
+        if (GameManager.Instance.quest.nowQuest == 6 && !GameManager.Instance.quest.sixthQuest[4])
+        {
+            enemyE.gameObject.SetActive(true);
+            enemyE.gameObject.layer = 3;
+            enemyE.Invoke("ChaseStart", 2);
         }
     }
 }
